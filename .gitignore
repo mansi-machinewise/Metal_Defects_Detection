@@ -20,3 +20,10 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Large dataset files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
