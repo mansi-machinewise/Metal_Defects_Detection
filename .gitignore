@@ -1,0 +1,22 @@
+# Environment
+.env
+
+# Dataset (too large for git)
+dataset/
+
+# Model weights
+*.pt
+*.onnx
+
+# Outputs
+outputs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db

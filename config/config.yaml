@@ -1,0 +1,137 @@
+# =============================================================================
+# Industrial Metal Defect Detection System — Central Configuration
+# =============================================================================
+# All values here are defaults. Override via .env or CLI arguments.
+# Never hardcode paths or thresholds in source files.
+
+project:
+  name: "MetalDefectDetection"
+  version: "1.0.0"
+  description: "Industrial metal surface defect detection using YOLOv8"
+
+# -----------------------------------------------------------------------------
+# Dataset
+# -----------------------------------------------------------------------------
+dataset:
+  root: "dataset"
+  yaml: "dataset/data.yaml"
+
+  splits:
+    train: "train/images"
+    val:   "valid/images"
+    test:  "test/images"
+
+  min_samples:
+    train: 50
+    val:   10
+    test:  5
+
+  image_extensions: [".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".webp"]
+
+# -----------------------------------------------------------------------------
+# Defect Classes
+# Default class names — will be overridden by data.yaml if present
+# -----------------------------------------------------------------------------
+classes:
+  names:
+    - Bump Mark 2-3 steps
+    - Fire Crack
+    - Flange wavy
+    - GM-Guide Mark-
+    - Heavy wear out on both top flange
+    - Heavy wear out
+    - LC -Longitudinal Crack-
+    - LNF -Lock not Found- on South flange in Sheet Pile
+    - Lap - Sliver on north top Junction
+    - Lap on South top flange tip
+    - Lap on south outer flange heavy section
+    - Lap
+    - MDM -Mill Defect Mechanical- on Web on web
+    - RPB -Roll Burr Pit- on Web
+    - Step in flange
+    - Twist in CR-80 Rail
+    - Web wavy
+    - crack
+    - porosity
+
+# -----------------------------------------------------------------------------
+# Training
+# Optimized for 16 GB RAM + 4 GB VRAM
+# -----------------------------------------------------------------------------
+training:
+  model: "yolov8n.pt"          # Nano — smallest memory footprint
+  epochs: 100
+  batch_size: 4                # Safe default for 4 GB VRAM
+  image_size: 640
+  workers: 2                   # Low to avoid RAM exhaustion
+  amp: true                    # Automatic Mixed Precision — MUST stay true for 4 GB GPU
+  cache: false                 # Disable caching — saves RAM
+  patience: 20                 # Early stopping patience
+  save_period: 10              # Save checkpoint every N epochs
+  exist_ok: true               # Overwrite existing run dir
+
+  # Optimizer settings
+  optimizer: "AdamW"
+  lr0: 0.001
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3
+
+  # Augmentation (keep light for small datasets)
+  augmentation:
+    hsv_h: 0.015
+    hsv_s: 0.7
+    hsv_v: 0.4
+    degrees: 10
+    translate: 0.1
+    scale: 0.5
+    flipud: 0.0
+    fliplr: 0.5
+    mosaic: 1.0
+    mixup: 0.0
+
+  # Output
+  project: "outputs/runs"
+  run_name: "defect_detection_v1"
+
+# -----------------------------------------------------------------------------
+# Inference & Detection
+# -----------------------------------------------------------------------------
+inference:
+  # Path to trained model weights (updated after training)
+  model_path: "outputs/runs/defect_detection_v1/weights/best.pt"
+
+  # Detection thresholds
+  confidence_threshold: 0.45   # Minimum confidence to count as a defect
+  iou_threshold: 0.45          # NMS IoU threshold
+  max_detections: 50
+
+  # GOOD/BAD decision logic
+  # A component is BAD if any defect confidence >= bad_threshold
+  bad_threshold: 0.45
+  # Or if defect count exceeds max_allowed_defects
+  max_allowed_defects: 0       # 0 = zero tolerance (any defect = BAD)
+
+  image_size: 640
+  device: "auto"               # "auto" | "cpu" | "cuda" | "cuda:0"
+
+# -----------------------------------------------------------------------------
+# Evaluation
+# -----------------------------------------------------------------------------
+evaluation:
+  output_dir: "outputs/reports"
+  predictions_dir: "outputs/predictions"
+  generate_confusion_matrix: true
+  generate_pr_curve: true
+  max_vis_samples: 20          # Max images to save with drawn predictions
+
+# -----------------------------------------------------------------------------
+# Logging
+# -----------------------------------------------------------------------------
+logging:
+  level: "INFO"                # DEBUG | INFO | WARNING | ERROR
+  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+  log_dir: "outputs/logs"
+  log_file: "metal_defect.log"
