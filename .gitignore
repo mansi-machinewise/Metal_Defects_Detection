@@ -26,4 +26,4 @@ Thumbs.db
 *.tar
 *.tar.gz
 *.rar
-*.7z
+*.7z!outputs/runs/defect_detection_v1/weights/best.pt
