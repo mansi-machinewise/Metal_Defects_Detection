@@ -1,17 +1,18 @@
 # Environment
 .env
 
-# Dataset (too large for git)
+# Datasets (too large for GitHub)
 dataset/
+dataset_merged/
 
 # Model weights
 *.pt
 *.onnx
 
-# Outputs
+# Outputs (generated files)
 outputs/
 
-# Python
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
@@ -21,9 +22,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Large dataset files
+# Large files
 *.zip
 *.tar
 *.tar.gz
-*.rar
-*.7z!outputs/runs/defect_detection_v1/weights/best.pt

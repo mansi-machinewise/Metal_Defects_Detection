@@ -1,8 +1,0 @@
-path: D:\Internship\Metal_Defects\dataset_merged
-train: train/images
-val: valid/images
-test: test/images
-
-nc: 1
-names:
-  - defect
