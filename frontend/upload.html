@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Image — Metal Defect Detection</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="upload.css" />
+</head>
+<body>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- Top nav bar — consistent wayfinding across pages -->
+  <header class="topbar fade-in">
+    <a href="home.html" class="topbar-brand">
+      <i class="fa-solid fa-industry"></i>
+      <span>Metal Defect Detection</span>
+    </a>
+    <div class="step-indicator">
+      <span class="step active">
+        <i class="fa-solid fa-circle-1"></i> Upload
+      </span>
+      <span class="step-line"></span>
+      <span class="step">
+        <i class="fa-regular fa-circle"></i> Result
+      </span>
+    </div>
+  </header>
+
+  <main class="upload-shell">
+
+    <section class="upload-intro fade-in delay-1">
+      <h1>Select a Component Image</h1>
+      <p>Upload a clear surface image of the metal component you want to inspect.</p>
+    </section>
+
+    <!-- Drop zone -->
+    <section class="dropzone fade-in delay-2" id="dropzone">
+      <input
+        type="file"
+        id="fileInput"
+        accept=".jpg,.jpeg,.png,.bmp,image/jpeg,image/png,image/bmp"
+        hidden
+      />
+
+      <div class="dropzone-content" id="dropzoneContent">
+        <div class="dropzone-icon">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <h2>Drag &amp; drop your image here</h2>
+        <p>or</p>
+        <button class="select-btn" id="selectBtn" type="button">
+          <i class="fa-solid fa-folder-open"></i>
+          <span>Select Image</span>
+        </button>
+        <p class="formats-note">Supported formats: JPG, JPEG, PNG, BMP</p>
+      </div>
+
+      <!-- Preview state (hidden until a file is chosen) -->
+      <div class="preview-content" id="previewContent" hidden>
+        <div class="preview-image-wrap">
+          <img id="previewImage" src="" alt="Selected component preview" />
+          <button class="remove-btn" id="removeBtn" type="button" title="Remove image">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="file-meta">
+          <i class="fa-solid fa-file-image"></i>
+          <span id="fileName">filename.jpg</span>
+          <span class="file-size" id="fileSize"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inline error message for invalid file types -->
+    <p class="error-message" id="errorMessage" hidden>
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>Unsupported file type. Please upload a JPG, JPEG, PNG, or BMP image.</span>
+    </p>
+
+    <!-- Continue action -->
+    <button class="continue-btn" id="continueBtn" type="button" disabled>
+      <span>Continue to Inspection</span>
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+
+  </main>
+
+  <script src="upload.js"></script>
+</body>
+</html>

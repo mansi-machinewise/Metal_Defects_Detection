@@ -31,3 +31,14 @@ rich>=13.0.0                # Pretty console output
 # Dev / Testing
 pytest>=7.4.0
 pytest-cov>=4.1.0
+
+# Phase 2+ — FastAPI Backend
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+Pillow>=10.0.0
+
+# FastAPI Backend
+fastapi>=0.110.0
+uvicorn>=0.29.0
+python-multipart>=0.0.9

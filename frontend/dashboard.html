@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inspection Result — Metal Defect Detection</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="topbar fade-in">
+    <a href="home.html" class="topbar-brand">
+      <i class="fa-solid fa-industry"></i>
+      <span>Metal Defect Detection</span>
+    </a>
+    <div class="step-indicator">
+      <span class="step">
+        <i class="fa-solid fa-check"></i> Upload
+      </span>
+      <span class="step-line"></span>
+      <span class="step active">
+        <i class="fa-solid fa-circle-2"></i> Result
+      </span>
+    </div>
+  </header>
+
+  <main class="dashboard-shell">
+
+    <section class="dashboard-intro fade-in delay-1">
+      <h1>Inspection Result</h1>
+      <p id="resultSubtitle">Analyzing component surface for visual defects.</p>
+    </section>
+
+    <!-- Image comparison panel -->
+    <section class="image-panel fade-in delay-2">
+      <div class="image-card">
+        <div class="image-card-header">
+          <i class="fa-solid fa-image"></i>
+          <span>Original Image</span>
+        </div>
+        <div class="image-frame">
+          <img id="originalImage" src="" alt="Original uploaded component" />
+        </div>
+      </div>
+
+      <div class="image-card">
+        <div class="image-card-header">
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          <span>Detection Result</span>
+          <span class="badge-soon" title="YOLOv8 overlay will render here once the backend is connected">
+            Placeholder
+          </span>
+        </div>
+        <div class="image-frame">
+          <img id="detectionImage" src="" alt="Detection result preview" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Result cards -->
+    <section class="result-cards fade-in delay-3">
+
+      <div class="result-card" id="classificationCard">
+        <div class="card-icon">
+          <i class="fa-solid fa-clipboard-check"></i>
+        </div>
+        <div class="card-label">Classification</div>
+        <div class="card-value" id="classificationValue">—</div>
+      </div>
+
+      <div class="result-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-gauge-high"></i>
+        </div>
+        <div class="card-label">Confidence</div>
+        <div class="card-value" id="confidenceValue">—</div>
+      </div>
+
+      <div class="result-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-bug"></i>
+        </div>
+        <div class="card-label">Defect Type</div>
+        <div class="card-value" id="defectTypeValue">—</div>
+      </div>
+
+    </section>
+
+    <button class="upload-another-btn fade-in delay-3" id="uploadAnotherBtn" type="button">
+      <i class="fa-solid fa-rotate-left"></i>
+      <span>Upload Another Image</span>
+    </button>
+
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

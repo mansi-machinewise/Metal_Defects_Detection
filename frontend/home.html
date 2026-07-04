@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Metal Defect Detection System</title>
+
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+  <!-- Background scan-line / grid texture -->
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main class="home-shell">
+
+    <!-- Top status strip — establishes "industrial system" framing -->
+    <div class="status-strip fade-in">
+      <span class="status-dot"></span>
+      <span class="status-text">System Ready</span>
+      <span class="status-divider">|</span>
+      <span class="status-text">Inspection Module v1.0</span>
+    </div>
+
+    <!-- Hero content -->
+    <section class="hero fade-in delay-1">
+      <div class="eyebrow">
+        <i class="fa-solid fa-industry"></i>
+        <span>Industrial Vision System</span>
+      </div>
+
+      <h1 class="title">AI Metal Defect Detection System</h1>
+      <h2 class="subtitle">Industrial Visual Quality Inspection</h2>
+
+      <p class="description">
+        This system analyzes surface images of industrial metal components to identify
+        visual defects such as scratches, cracks, dents, and corrosion. Each component is
+        automatically classified as <strong class="text-good">GOOD</strong> or
+        <strong class="text-bad">BAD</strong> to support fast, consistent quality control
+        decisions on the production line.
+      </p>
+
+      <button class="cta-button" id="selectImageBtn" type="button">
+        <i class="fa-solid fa-image"></i>
+        <span>Select Image</span>
+        <i class="fa-solid fa-arrow-right cta-arrow"></i>
+      </button>
+    </section>
+
+    <!-- Capability strip — quiet, supporting row, not a second hero -->
+    <section class="capability-row fade-in delay-2">
+      <div class="capability">
+        <i class="fa-solid fa-magnifying-glass-chart"></i>
+        <span>Surface Defect Scanning</span>
+      </div>
+      <div class="capability">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Real-Time Classification</span>
+      </div>
+      <div class="capability">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Consistent Quality Control</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="home-footer fade-in delay-3">
+    <span>Metal Surface Inspection &middot; Built for Manufacturing QC</span>
+  </footer>
+
+  <script src="home.js"></script>
+</body>
+</html>

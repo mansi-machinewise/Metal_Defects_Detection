@@ -1,0 +1,366 @@
+/* =========================================================
+   dashboard.css — Result Dashboard Styling
+   ========================================================= */
+
+:root {
+  --bg: #102B40;
+  --card: #18344F;
+  --card-elevated: #1E3D5C;
+  --accent: #00C8FF;
+  --good: #2ECC71;
+  --bad: #FF4B4B;
+  --text-primary: #EAF2F8;
+  --text-secondary: #8FA6BA;
+  --border-subtle: rgba(0, 200, 255, 0.15);
+  --font: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------------------------------------------------------
+   Top navigation bar (shared pattern with upload.css)
+   --------------------------------------------------------- */
+.topbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 40px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.topbar-brand i {
+  color: var(--accent);
+}
+
+.topbar-brand:hover {
+  color: var(--accent);
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step.active {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.step i.fa-check {
+  color: var(--good);
+}
+
+.step-line {
+  width: 36px;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ---------------------------------------------------------
+   Page shell
+   --------------------------------------------------------- */
+.dashboard-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-intro h1 {
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.dashboard-intro p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* ---------------------------------------------------------
+   Image comparison panel
+   --------------------------------------------------------- */
+.image-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.image-card {
+  background: var(--card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.image-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.image-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.image-card-header i {
+  color: var(--accent);
+}
+
+.badge-soon {
+  margin-left: auto;
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(0, 200, 255, 0.12);
+  color: var(--accent);
+  border: 1px solid var(--border-subtle);
+}
+
+.image-frame {
+  aspect-ratio: 4 / 3;
+  background: #0A1E2E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------
+   Result cards
+   --------------------------------------------------------- */
+.result-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.result-card {
+  background: var(--card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 200, 255, 0.1);
+  border-radius: 50%;
+}
+
+.card-icon i {
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
+.card-label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Classification state coloring — applied via JS */
+.result-card.status-good .card-icon {
+  background: rgba(46, 204, 113, 0.12);
+}
+.result-card.status-good .card-icon i {
+  color: var(--good);
+}
+.result-card.status-good .card-value {
+  color: var(--good);
+}
+
+.result-card.status-bad .card-icon {
+  background: rgba(255, 75, 75, 0.12);
+}
+.result-card.status-bad .card-icon i {
+  color: var(--bad);
+}
+.result-card.status-bad .card-value {
+  color: var(--bad);
+}
+
+/* ---------------------------------------------------------
+   Upload another button
+   --------------------------------------------------------- */
+.upload-another-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 34px;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--card-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.upload-another-btn:hover {
+  background: linear-gradient(135deg, var(--accent), #4FE0FF);
+  color: #062436;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 200, 255, 0.35);
+}
+
+.upload-another-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------
+   Animations
+   --------------------------------------------------------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.18s; }
+.delay-3 { animation-delay: 0.3s; }
+
+@keyframes valuePop {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.card-value.pop {
+  animation: valuePop 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .result-card, .image-card, .card-value.pop {
+    animation: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+@media (max-width: 860px) {
+  .image-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .result-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 16px 20px;
+  }
+
+  .topbar-brand span {
+    display: none;
+  }
+
+  .upload-another-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

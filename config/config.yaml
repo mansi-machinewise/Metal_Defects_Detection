@@ -1,8 +1,6 @@
 # =============================================================================
 # Industrial Metal Defect Detection System — Central Configuration
 # =============================================================================
-# All values here are defaults. Override via .env or CLI arguments.
-# Never hardcode paths or thresholds in source files.
 
 project:
   name: "MetalDefectDetection"
@@ -13,8 +11,8 @@ project:
 # Dataset
 # -----------------------------------------------------------------------------
 dataset:
-  root: "dataset"
-  yaml: "dataset/data.yaml"
+  root: "dataset_merged"
+  yaml: "dataset_merged/data.yaml"
 
   splits:
     train: "train/images"
@@ -29,48 +27,28 @@ dataset:
   image_extensions: [".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".webp"]
 
 # -----------------------------------------------------------------------------
-# Defect Classes
-# Default class names — will be overridden by data.yaml if present
+# Classes
 # -----------------------------------------------------------------------------
 classes:
   names:
-    - Bump Mark 2-3 steps
-    - Fire Crack
-    - Flange wavy
-    - GM-Guide Mark-
-    - Heavy wear out on both top flange
-    - Heavy wear out
-    - LC -Longitudinal Crack-
-    - LNF -Lock not Found- on South flange in Sheet Pile
-    - Lap - Sliver on north top Junction
-    - Lap on South top flange tip
-    - Lap on south outer flange heavy section
-    - Lap
-    - MDM -Mill Defect Mechanical- on Web on web
-    - RPB -Roll Burr Pit- on Web
-    - Step in flange
-    - Twist in CR-80 Rail
-    - Web wavy
-    - crack
-    - porosity
+    - defect
 
 # -----------------------------------------------------------------------------
 # Training
-# Optimized for 16 GB RAM + 4 GB VRAM
 # -----------------------------------------------------------------------------
 training:
-  model: "yolov8n.pt"          # Nano — smallest memory footprint
-  epochs: 100
-  batch_size: 4                # Safe default for 4 GB VRAM
+  model: "yolov8s.pt"
+  epochs: 150
+  batch_size: 4
   image_size: 640
-  workers: 2                   # Low to avoid RAM exhaustion
-  amp: true                    # Automatic Mixed Precision — MUST stay true for 4 GB GPU
-  cache: false                 # Disable caching — saves RAM
-  patience: 20                 # Early stopping patience
-  save_period: 10              # Save checkpoint every N epochs
-  exist_ok: true               # Overwrite existing run dir
+  workers: 2
+  amp: false
+  cache: false
+  patience: 30
+  save_period: 10
+  exist_ok: false
+  run_name: "defect_detection_v2"
 
-  # Optimizer settings
   optimizer: "AdamW"
   lr0: 0.001
   lrf: 0.01
@@ -78,43 +56,49 @@ training:
   weight_decay: 0.0005
   warmup_epochs: 3
 
-  # Augmentation (keep light for small datasets)
   augmentation:
     hsv_h: 0.015
-    hsv_s: 0.7
-    hsv_v: 0.4
-    degrees: 10
+    hsv_s: 0.8
+    hsv_v: 0.5
+    degrees: 15
     translate: 0.1
-    scale: 0.5
-    flipud: 0.0
+    scale: 0.6
+    flipud: 0.3
     fliplr: 0.5
     mosaic: 1.0
-    mixup: 0.0
+    mixup: 0.1
 
-  # Output
   project: "outputs/runs"
-  run_name: "defect_detection_v1"
 
 # -----------------------------------------------------------------------------
-# Inference & Detection
+# Inference
 # -----------------------------------------------------------------------------
 inference:
-  # Path to trained model weights (updated after training)
-  model_path: "outputs/runs/defect_detection_v1/weights/best.pt"
-
-  # Detection thresholds
-  confidence_threshold: 0.45   # Minimum confidence to count as a defect
-  iou_threshold: 0.45          # NMS IoU threshold
+  model_path: "outputs/runs/defect_detection_v2/weights/best.pt"
+  confidence_threshold: 0.35
+  iou_threshold: 0.45
   max_detections: 50
-
-  # GOOD/BAD decision logic
-  # A component is BAD if any defect confidence >= bad_threshold
-  bad_threshold: 0.45
-  # Or if defect count exceeds max_allowed_defects
-  max_allowed_defects: 0       # 0 = zero tolerance (any defect = BAD)
-
+  bad_threshold: 0.35
+  max_allowed_defects: 0
   image_size: 640
-  device: "auto"               # "auto" | "cpu" | "cuda" | "cuda:0"
+  device: "auto"
+
+# -----------------------------------------------------------------------------
+# Camera
+# -----------------------------------------------------------------------------
+camera:
+  source: 0
+  width: 1280
+  height: 720
+  fps_target: 30
+  buffer_size: 1
+  reconnect_delay_sec: 2.0
+  max_reconnect_attempts: 5
+  inference_every_n_frames: 1
+  window_name: "Metal Defect Detection — Live Feed"
+  display_width: 960
+  quit_key: "q"
+  save_key: "s"
 
 # -----------------------------------------------------------------------------
 # Evaluation
@@ -124,13 +108,13 @@ evaluation:
   predictions_dir: "outputs/predictions"
   generate_confusion_matrix: true
   generate_pr_curve: true
-  max_vis_samples: 20          # Max images to save with drawn predictions
+  max_vis_samples: 20
 
 # -----------------------------------------------------------------------------
 # Logging
 # -----------------------------------------------------------------------------
 logging:
-  level: "INFO"                # DEBUG | INFO | WARNING | ERROR
+  level: "INFO"
   format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
   date_format: "%Y-%m-%d %H:%M:%S"
   log_dir: "outputs/logs"
