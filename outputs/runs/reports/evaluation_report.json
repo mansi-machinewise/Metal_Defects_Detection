@@ -1,0 +1,1216 @@
+{
+  "total_images": 26,
+  "good_count": 3,
+  "bad_count": 23,
+  "failed": 0,
+  "total_defects_detected": 83,
+  "avg_defects_per_image": 3.19,
+  "good_rate_pct": 11.5,
+  "bad_rate_pct": 88.5,
+  "avg_inference_ms": 81.8,
+  "min_inference_ms": 23.5,
+  "max_inference_ms": 1448.3,
+  "model_path": "outputs\\runs\\defect_detection_v1\\weights\\best.pt",
+  "device_used": "cpu",
+  "confidence_threshold": 0.45,
+  "bad_threshold": 0.45,
+  "predictions": [
+    {
+      "image_path": "dataset\\test\\images\\11668_2014_9832_Fig2_HTML_jpg.rf.df58e289392cb4c9ae3e705ed5c8eb9e.jpg",
+      "status": "BAD",
+      "defect_count": 3,
+      "max_confidence": 0.771,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 1448.3,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.771,
+          "bbox_xyxy": [
+            64.6,
+            42.9,
+            342.6,
+            258.6
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.7402,
+          "bbox_xyxy": [
+            68.6,
+            359.2,
+            348.1,
+            566.0
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.5909,
+          "bbox_xyxy": [
+            379.4,
+            15.1,
+            407.5,
+            276.9
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\22-possible-causes-of-weld-metal-porosity-weld-beads_jpg.rf.c83a8fb929cb88639321ad8168d889af.jpg",
+      "status": "BAD",
+      "defect_count": 10,
+      "max_confidence": 0.7971,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 44.8,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7971,
+          "bbox_xyxy": [
+            424.9,
+            443.8,
+            446.7,
+            467.6
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7697,
+          "bbox_xyxy": [
+            94.9,
+            281.2,
+            121.8,
+            314.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7659,
+          "bbox_xyxy": [
+            406.2,
+            476.5,
+            428.1,
+            496.7
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7506,
+          "bbox_xyxy": [
+            239.2,
+            229.8,
+            268.4,
+            266.7
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7286,
+          "bbox_xyxy": [
+            306.2,
+            564.7,
+            325.3,
+            582.9
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7102,
+          "bbox_xyxy": [
+            408.1,
+            91.7,
+            437.3,
+            113.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6959,
+          "bbox_xyxy": [
+            97.5,
+            517.2,
+            158.2,
+            607.8
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.671,
+          "bbox_xyxy": [
+            335.2,
+            231.6,
+            392.6,
+            267.6
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5247,
+          "bbox_xyxy": [
+            368.0,
+            508.8,
+            383.9,
+            525.1
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5212,
+          "bbox_xyxy": [
+            326.1,
+            546.2,
+            346.9,
+            565.3
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\cracked-wheel-1_jpg.rf.45eff976848b0b0f423adeef2f22a56b.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.7484,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 32.3,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.7484,
+          "bbox_xyxy": [
+            271.8,
+            291.9,
+            490.0,
+            634.6
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.7143,
+          "bbox_xyxy": [
+            286.8,
+            280.0,
+            495.4,
+            329.7
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\Example-of-Welding-Porosity_jpg.rf.2e61a38d606aacc9f43d1c620b57f34c.jpg",
+      "status": "BAD",
+      "defect_count": 4,
+      "max_confidence": 0.7176,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 31.5,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7176,
+          "bbox_xyxy": [
+            381.7,
+            325.3,
+            441.1,
+            367.7
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5403,
+          "bbox_xyxy": [
+            174.3,
+            356.5,
+            246.1,
+            456.6
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.52,
+          "bbox_xyxy": [
+            428.1,
+            379.4,
+            442.5,
+            396.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5122,
+          "bbox_xyxy": [
+            236.1,
+            338.0,
+            383.8,
+            450.7
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\images-11-1-_jpeg_jpg.rf.4b771cd38daf7f14f2b89a79c0c59a66.jpg",
+      "status": "GOOD",
+      "defect_count": 0,
+      "max_confidence": 0.0,
+      "dominant_defect": null,
+      "device_used": "cpu",
+      "inference_ms": 28.7,
+      "defects": []
+    },
+    {
+      "image_path": "dataset\\test\\images\\images-16-_jpg.rf.ca6adc6e5a9d6ec52499cffc93118ede.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.729,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 25.2,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.729,
+          "bbox_xyxy": [
+            70.0,
+            3.2,
+            386.8,
+            352.1
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.6139,
+          "bbox_xyxy": [
+            347.1,
+            329.8,
+            465.0,
+            458.7
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\images-5-_jpg.rf.e2d825afac824d0a5dfdb589b174e748.jpg",
+      "status": "BAD",
+      "defect_count": 8,
+      "max_confidence": 0.8277,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 27.9,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.8277,
+          "bbox_xyxy": [
+            287.3,
+            416.9,
+            349.6,
+            495.4
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6777,
+          "bbox_xyxy": [
+            279.0,
+            172.1,
+            299.3,
+            207.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.668,
+          "bbox_xyxy": [
+            348.5,
+            158.6,
+            366.7,
+            182.9
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6599,
+          "bbox_xyxy": [
+            327.7,
+            196.7,
+            366.9,
+            242.7
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.657,
+          "bbox_xyxy": [
+            256.7,
+            398.3,
+            293.3,
+            453.2
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6185,
+          "bbox_xyxy": [
+            445.7,
+            441.7,
+            513.4,
+            495.9
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5962,
+          "bbox_xyxy": [
+            120.8,
+            348.5,
+            251.7,
+            462.2
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5673,
+          "bbox_xyxy": [
+            508.7,
+            422.7,
+            640.0,
+            575.0
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\images-7-_jpg.rf.3a30686005efcd4ac53c75540ec31be4.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.861,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 26.7,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.861,
+          "bbox_xyxy": [
+            295.3,
+            464.1,
+            354.7,
+            505.8
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5573,
+          "bbox_xyxy": [
+            191.4,
+            524.6,
+            213.1,
+            551.5
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG20220608112222_jpg.rf.d5942c63136609abf8a2e401e71091a9.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.5203,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 29.4,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.5203,
+          "bbox_xyxy": [
+            254.8,
+            466.5,
+            320.5,
+            639.0
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.5068,
+          "bbox_xyxy": [
+            324.6,
+            127.9,
+            419.2,
+            488.7
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG20220608112315_jpg.rf.d1238cd1583e0b63d44c6f91c3155e9f.jpg",
+      "status": "BAD",
+      "defect_count": 1,
+      "max_confidence": 0.4601,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 24.6,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.4601,
+          "bbox_xyxy": [
+            166.6,
+            27.0,
+            364.3,
+            429.2
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20220604_180149_jpg.rf.c0113c2fee20b0af9b7e16bc0d39300a.jpg",
+      "status": "BAD",
+      "defect_count": 1,
+      "max_confidence": 0.8022,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 25.1,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.8022,
+          "bbox_xyxy": [
+            306.6,
+            256.0,
+            639.9,
+            631.1
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20220604_180209_jpg.rf.5f28281d92fc63837e8e57c879487a7b.jpg",
+      "status": "BAD",
+      "defect_count": 1,
+      "max_confidence": 0.6986,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 25.5,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.6986,
+          "bbox_xyxy": [
+            429.1,
+            359.7,
+            460.6,
+            422.4
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20230131_113916_jpg.rf.4996eb63547a7f325cb5a8ed72bf53dd.jpg",
+      "status": "GOOD",
+      "defect_count": 0,
+      "max_confidence": 0.0,
+      "dominant_defect": null,
+      "device_used": "cpu",
+      "inference_ms": 24.4,
+      "defects": []
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20230131_114028_jpg.rf.94601a1fdfa0e1df578dd69d965a1c43.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.647,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 26.3,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.647,
+          "bbox_xyxy": [
+            401.7,
+            386.4,
+            492.4,
+            476.4
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.45,
+          "bbox_xyxy": [
+            303.1,
+            221.1,
+            386.6,
+            253.7
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20230131_114143_jpg.rf.d598330a18ce65938ca95816874d9fa0.jpg",
+      "status": "BAD",
+      "defect_count": 7,
+      "max_confidence": 0.7596,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 26.3,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7596,
+          "bbox_xyxy": [
+            374.2,
+            228.0,
+            396.9,
+            252.5
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7577,
+          "bbox_xyxy": [
+            323.5,
+            355.4,
+            340.5,
+            373.6
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7287,
+          "bbox_xyxy": [
+            306.5,
+            384.4,
+            325.5,
+            405.1
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7058,
+          "bbox_xyxy": [
+            367.3,
+            265.7,
+            388.0,
+            286.6
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.576,
+          "bbox_xyxy": [
+            279.9,
+            442.6,
+            301.8,
+            460.5
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.5352,
+          "bbox_xyxy": [
+            329.6,
+            0.0,
+            640.0,
+            352.7
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5203,
+          "bbox_xyxy": [
+            306.0,
+            410.8,
+            322.6,
+            427.7
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20230131_114447_jpg.rf.7837ffa551b1687b6153435032c06cec.jpg",
+      "status": "BAD",
+      "defect_count": 7,
+      "max_confidence": 0.8488,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 25.2,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.8488,
+          "bbox_xyxy": [
+            196.7,
+            114.4,
+            234.4,
+            154.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6678,
+          "bbox_xyxy": [
+            245.9,
+            265.7,
+            270.1,
+            291.8
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6386,
+          "bbox_xyxy": [
+            182.0,
+            222.5,
+            209.0,
+            239.2
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6126,
+          "bbox_xyxy": [
+            212.6,
+            384.6,
+            248.9,
+            430.2
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5476,
+          "bbox_xyxy": [
+            517.3,
+            526.7,
+            547.2,
+            552.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.4952,
+          "bbox_xyxy": [
+            509.8,
+            153.1,
+            568.1,
+            234.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.4936,
+          "bbox_xyxy": [
+            164.0,
+            390.8,
+            184.3,
+            409.6
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20230131_114504_jpg.rf.b4c79aaec2b03eb77c66f0b17241c7f4.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.8955,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 28.0,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.8955,
+          "bbox_xyxy": [
+            169.5,
+            442.5,
+            235.5,
+            478.1
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6388,
+          "bbox_xyxy": [
+            389.6,
+            255.0,
+            486.2,
+            327.2
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20230131_114504_jpg.rf.c7bef9ab3331c3d774fcf4b6d58e8800.jpg",
+      "status": "BAD",
+      "defect_count": 12,
+      "max_confidence": 0.798,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 28.3,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.798,
+          "bbox_xyxy": [
+            536.3,
+            472.6,
+            592.0,
+            531.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7474,
+          "bbox_xyxy": [
+            434.4,
+            505.7,
+            467.8,
+            561.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7438,
+          "bbox_xyxy": [
+            147.8,
+            7.0,
+            188.2,
+            49.4
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7234,
+          "bbox_xyxy": [
+            87.5,
+            247.4,
+            133.5,
+            302.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7006,
+          "bbox_xyxy": [
+            397.2,
+            529.5,
+            428.7,
+            571.9
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6968,
+          "bbox_xyxy": [
+            277.6,
+            410.4,
+            304.8,
+            436.2
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6889,
+          "bbox_xyxy": [
+            205.3,
+            391.5,
+            265.3,
+            435.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6845,
+          "bbox_xyxy": [
+            345.0,
+            410.3,
+            372.8,
+            437.6
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6166,
+          "bbox_xyxy": [
+            49.2,
+            395.7,
+            110.9,
+            435.9
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5071,
+          "bbox_xyxy": [
+            574.2,
+            435.1,
+            638.6,
+            522.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.4984,
+          "bbox_xyxy": [
+            0.1,
+            402.5,
+            18.8,
+            424.1
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.4773,
+          "bbox_xyxy": [
+            279.5,
+            399.8,
+            345.4,
+            435.1
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\IMG_20230131_185619_jpg.rf.fb87b149d97e426a77bd06ee9e322ed3.jpg",
+      "status": "BAD",
+      "defect_count": 1,
+      "max_confidence": 0.7227,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 23.5,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.7227,
+          "bbox_xyxy": [
+            337.1,
+            286.7,
+            354.7,
+            362.2
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\nut-moi-han_jpg.rf.4142624c002565f9f673315400e768b4.jpg",
+      "status": "GOOD",
+      "defect_count": 0,
+      "max_confidence": 0.0,
+      "dominant_defect": null,
+      "device_used": "cpu",
+      "inference_ms": 25.0,
+      "defects": []
+    },
+    {
+      "image_path": "dataset\\test\\images\\Screenshot-2023-02-08-102754_png_jpg.rf.3f9243364d81e5986f915fa4f71eb646.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.7983,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 28.0,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7983,
+          "bbox_xyxy": [
+            301.4,
+            272.1,
+            332.9,
+            312.4
+          ]
+        },
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.6373,
+          "bbox_xyxy": [
+            236.8,
+            182.3,
+            304.6,
+            287.5
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\Screenshot-2023-02-08-102823_png_jpg.rf.eca0130ca2bc7c1cbbd0f242856a1752.jpg",
+      "status": "BAD",
+      "defect_count": 4,
+      "max_confidence": 0.7654,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 23.5,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7654,
+          "bbox_xyxy": [
+            409.4,
+            41.5,
+            436.3,
+            66.2
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.7185,
+          "bbox_xyxy": [
+            286.9,
+            199.1,
+            343.0,
+            293.2
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5832,
+          "bbox_xyxy": [
+            287.8,
+            349.0,
+            302.5,
+            369.1
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5668,
+          "bbox_xyxy": [
+            269.2,
+            389.9,
+            283.1,
+            402.3
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\Screenshot-2023-02-08-103049_png_jpg.rf.6ae2f4b6114b2ee254c4ec5d8357db1f.jpg",
+      "status": "BAD",
+      "defect_count": 6,
+      "max_confidence": 0.6695,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 23.7,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6695,
+          "bbox_xyxy": [
+            246.2,
+            391.2,
+            257.4,
+            402.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.658,
+          "bbox_xyxy": [
+            250.8,
+            341.1,
+            286.2,
+            364.6
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5623,
+          "bbox_xyxy": [
+            249.7,
+            368.4,
+            268.2,
+            384.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5532,
+          "bbox_xyxy": [
+            269.7,
+            368.4,
+            288.8,
+            383.0
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.5362,
+          "bbox_xyxy": [
+            232.0,
+            374.7,
+            249.0,
+            391.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.4633,
+          "bbox_xyxy": [
+            225.2,
+            393.6,
+            235.8,
+            400.5
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\sro-170400-hammer-01_jpg.rf.f44e079c326b9429aaac447540a07eea.jpg",
+      "status": "BAD",
+      "defect_count": 2,
+      "max_confidence": 0.8382,
+      "dominant_defect": "porosity",
+      "device_used": "cpu",
+      "inference_ms": 23.9,
+      "defects": [
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.8382,
+          "bbox_xyxy": [
+            416.1,
+            345.8,
+            487.0,
+            429.3
+          ]
+        },
+        {
+          "class_id": 18,
+          "class_name": "porosity",
+          "confidence": 0.6744,
+          "bbox_xyxy": [
+            418.5,
+            418.5,
+            437.6,
+            443.1
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\weldcrack_jpg.rf.251a9061b6f22e57d95b0a3abce291fd.jpg",
+      "status": "BAD",
+      "defect_count": 1,
+      "max_confidence": 0.691,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 26.1,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.691,
+          "bbox_xyxy": [
+            346.1,
+            243.1,
+            378.1,
+            503.0
+          ]
+        }
+      ]
+    },
+    {
+      "image_path": "dataset\\test\\images\\weldcrack_jpg.rf.8c7f5c010fa27fec7afadfa8dac6aab8.jpg",
+      "status": "BAD",
+      "defect_count": 1,
+      "max_confidence": 0.6622,
+      "dominant_defect": "crack",
+      "device_used": "cpu",
+      "inference_ms": 24.2,
+      "defects": [
+        {
+          "class_id": 17,
+          "class_name": "crack",
+          "confidence": 0.6622,
+          "bbox_xyxy": [
+            262.0,
+            128.9,
+            295.3,
+            402.9
+          ]
+        }
+      ]
+    }
+  ],
+  "total_eval_seconds": 2.5
+}

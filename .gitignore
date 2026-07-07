@@ -10,7 +10,7 @@ dataset_merged/
 *.onnx
 
 # Outputs (generated files)
-outputs/
+
 
 # Python cache
 __pycache__/
