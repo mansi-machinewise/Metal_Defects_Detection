@@ -195,7 +195,7 @@ class DefectModelTrainer:
         # Base from config
         aug = self.train_cfg.get("augmentation", {})
         params: dict = {
-            "data":         str(self.dataset_yaml),
+            "data":         str(self.dataset_yaml.resolve()),
             "epochs":       self.train_cfg["epochs"],
             "batch":        self.train_cfg["batch_size"],
             "imgsz":        self.train_cfg["image_size"],
@@ -304,3 +304,4 @@ class TrainingResult:
             f"elapsed={self.elapsed_minutes}min, "
             f"device={self.device_used})"
         )
+    
