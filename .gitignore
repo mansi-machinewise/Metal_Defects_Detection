@@ -6,7 +6,7 @@ dataset/
 dataset_merged/
 
 # Model weights
-*.pt
+
 *.onnx
 
 # Outputs (generated files)
