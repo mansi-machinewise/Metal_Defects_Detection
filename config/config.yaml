@@ -37,36 +37,45 @@ classes:
 # Training
 # -----------------------------------------------------------------------------
 training:
-  model: "yolov8s.pt"
+  training:
+  model: "yolov8s.pt"       # Small — good accuracy/speed balance
   epochs: 150
-  batch_size: 4
+  batch_size: 8             # Admin PC has 102GB RAM — can handle larger batch
   image_size: 640
-  workers: 2
-  amp: false
+  workers: 4                # More workers = faster data loading
+  amp: false                # CPU — disable AMP
   cache: false
   patience: 30
   save_period: 10
-  exist_ok: false
-  run_name: "defect_detection_v2"
+  exist_ok: true
+  run_name: "defect_v3"
 
   optimizer: "AdamW"
   lr0: 0.001
   lrf: 0.01
   momentum: 0.937
   weight_decay: 0.0005
-  warmup_epochs: 3
+  warmup_epochs: 3      # Longer warmup = more stable training start
+
+  # Loss weights — increase box loss for better localization
+  box: 7.5                  # Default
+  cls: 2.0                  # Increase from 0.5 — single class needs more weight
+  dfl: 1.5                  # Default
+  single_cls: true
 
   augmentation:
-    hsv_h: 0.015
-    hsv_s: 0.8
-    hsv_v: 0.5
-    degrees: 15
-    translate: 0.1
-    scale: 0.6
-    flipud: 0.3
-    fliplr: 0.5
-    mosaic: 1.0
-    mixup: 0.1
+    hsv_h: 0.010      # Minimal hue shift (metal is mostly grey/silver)
+    hsv_s: 0.5        # Moderate saturation (rust color variation)
+    hsv_v: 0.4        # Brightness variation (lighting changes)
+    degrees: 10        # Small rotation (camera is mostly fixed)
+    translate: 0.1     # Small translation
+    scale: 0.5         # Scale variation (distance from camera)
+    flipud: 0.5        # Vertical flip (metal can be upside down)
+    fliplr: 0.5        # Horizontal flip
+    mosaic: 1.0        # Keep mosaic — great for small defects
+    mixup: 0.0         # Disable mixup for metal inspection
+    copy_paste: 0.0    # Disable — can create impossible defect patterns
+    erasing: 0.2       # Light cutout/erasing
 
   project: "outputs/runs"
 
@@ -74,11 +83,11 @@ training:
 # Inference
 # -----------------------------------------------------------------------------
 inference:
-  model_path: "outputs/runs/defect_detection_v2/weights/best.pt"
-  confidence_threshold: 0.35
+  model_path: "outputs/runs/defect_v3/weights/best.pt"
+  confidence_threshold: 0.20
   iou_threshold: 0.45
   max_detections: 50
-  bad_threshold: 0.35
+  bad_threshold: 0.20
   max_allowed_defects: 0
   image_size: 640
   device: "auto"
