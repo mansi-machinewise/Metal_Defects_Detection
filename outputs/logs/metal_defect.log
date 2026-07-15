@@ -7939,3 +7939,570 @@ Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. Y
 2026-07-09 16:27:02 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
 2026-07-09 16:27:04 | INFO     | metal_defect.training.trainer | Loading base model: yolov8n.pt
 2026-07-09 16:27:04 | INFO     | metal_defect.training.trainer | Starting training — this may take a while ...
+2026-07-11 12:06:59 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:06:59 | INFO     | metal_defect | Logging initialized
+2026-07-11 12:06:59 | INFO     | metal_defect |   Level    : INFO
+2026-07-11 12:06:59 | INFO     | metal_defect |   Log file : outputs\logs\metal_defect.log
+2026-07-11 12:06:59 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:06:59 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:06:59 | INFO     | metal_defect.__main__ | METAL DEFECT DETECTION — Dataset Validation
+2026-07-11 12:06:59 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:06:59 | INFO     | metal_defect.utils.config | Config loaded from: D:\Metal_Defects\Metal_Defects_Detection\config\config.yaml
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator | DATASET VALIDATION STARTED
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator |   Dataset Root : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator |   YAML Path    : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator | Checking data.yaml ...
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator | data.yaml: ✓  nc=1  classes=['defect']
+2026-07-11 12:06:59 | INFO     | metal_defect.data.validator | Validating split 'train': dataset_merged\train\images
+2026-07-11 12:10:53 | INFO     | metal_defect.data.validator |   train  → images: 26867 | labels: 26867 | annotations: 62494 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:10:53 | INFO     | metal_defect.data.validator | Validating split 'val': dataset_merged\valid\images
+2026-07-11 12:11:04 | INFO     | metal_defect.data.validator |   val    → images: 3346 | labels: 3346 | annotations: 4342 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:11:04 | INFO     | metal_defect.data.validator | Validating split 'test': dataset_merged\test\images
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   test   → images: 3311 | labels: 3311 | annotations: 1974 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator | DATASET VALIDATION REPORT
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   Dataset Root  : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   YAML Valid    : True
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   Classes       : 1 → ['defect']
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   Total Images  : 33524
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   Split 'train' [✓ OK]
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Images       : 26867
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Labels       : 26867
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Annotations  : 62494
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |       [0] defect                    : 62494
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   Split 'val' [✓ OK]
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Images       : 3346
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Labels       : 3346
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Annotations  : 4342
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |       [0] defect                    : 4342
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   Split 'test' [✓ OK]
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Images       : 3311
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Labels       : 3311
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Annotations  : 1974
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |       [0] defect                    : 1974
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator |   RESULT: ✓  DATASET IS VALID — Ready for training.
+2026-07-11 12:11:14 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:11:14 | INFO     | metal_defect.__main__ | 
+✓  Dataset validation PASSED. Ready to train.
+
+2026-07-11 12:11:51 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:11:51 | INFO     | metal_defect | Logging initialized
+2026-07-11 12:11:51 | INFO     | metal_defect |   Level    : INFO
+2026-07-11 12:11:51 | INFO     | metal_defect |   Log file : outputs\logs\metal_defect.log
+2026-07-11 12:11:51 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:13:31 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:13:31 | INFO     | metal_defect | Logging initialized
+2026-07-11 12:13:31 | INFO     | metal_defect |   Level    : INFO
+2026-07-11 12:13:31 | INFO     | metal_defect |   Log file : outputs\logs\metal_defect.log
+2026-07-11 12:13:31 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.__main__ | METAL DEFECT DETECTION — Training Pipeline
+2026-07-11 12:13:32 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.config | Config loaded from: D:\Metal_Defects\Metal_Defects_Detection\config\config.yaml
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device | HARDWARE CONFIGURATION
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device |   PyTorch Version   : 2.13.0+cpu
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device |   CUDA Available    : False
+2026-07-11 12:13:32 | WARNING  | metal_defect.utils.device |   ⚠  No CUDA-capable GPU detected.
+2026-07-11 12:13:32 | WARNING  | metal_defect.utils.device |      Training and inference will run on CPU.
+2026-07-11 12:13:32 | WARNING  | metal_defect.utils.device |      Expect significantly slower performance.
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device |   Selected Device   : cpu
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device |   RAM Total         : 102.30 GB
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device |   RAM Available     : 52.48 GB
+2026-07-11 12:13:32 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.__main__ | Running dataset validation before training ...
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator | DATASET VALIDATION STARTED
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator |   Dataset Root : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator |   YAML Path    : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator | Checking data.yaml ...
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator | data.yaml: ✓  nc=1  classes=['defect']
+2026-07-11 12:13:32 | INFO     | metal_defect.data.validator | Validating split 'train': dataset_merged\train\images
+2026-07-11 12:14:09 | INFO     | metal_defect.data.validator |   train  → images: 26867 | labels: 26867 | annotations: 62494 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:14:09 | INFO     | metal_defect.data.validator | Validating split 'val': dataset_merged\valid\images
+2026-07-11 12:14:11 | INFO     | metal_defect.data.validator |   val    → images: 3346 | labels: 3346 | annotations: 4342 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:14:11 | INFO     | metal_defect.data.validator | Validating split 'test': dataset_merged\test\images
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   test   → images: 3311 | labels: 3311 | annotations: 1974 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator | DATASET VALIDATION REPORT
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   Dataset Root  : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   YAML Valid    : True
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   Classes       : 1 → ['defect']
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   Total Images  : 33524
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   Split 'train' [✓ OK]
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Images       : 26867
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Labels       : 26867
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Annotations  : 62494
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |       [0] defect                    : 62494
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   Split 'val' [✓ OK]
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Images       : 3346
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Labels       : 3346
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Annotations  : 4342
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |       [0] defect                    : 4342
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   Split 'test' [✓ OK]
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Images       : 3311
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Labels       : 3311
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Annotations  : 1974
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |       [0] defect                    : 1974
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator |   RESULT: ✓  DATASET IS VALID — Ready for training.
+2026-07-11 12:14:12 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:14:12 | INFO     | metal_defect.__main__ | Dataset validation passed. Proceeding to training.
+
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | ============================================================
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | TRAINING PIPELINE STARTED
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | ============================================================
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device | HARDWARE CONFIGURATION
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device |   PyTorch Version   : 2.13.0+cpu
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device |   CUDA Available    : False
+2026-07-11 12:14:12 | WARNING  | metal_defect.utils.device |   ⚠  No CUDA-capable GPU detected.
+2026-07-11 12:14:12 | WARNING  | metal_defect.utils.device |      Training and inference will run on CPU.
+2026-07-11 12:14:12 | WARNING  | metal_defect.utils.device |      Expect significantly slower performance.
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device |   Selected Device   : cpu
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device |   RAM Total         : 102.30 GB
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device |   RAM Available     : 52.56 GB
+2026-07-11 12:14:12 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:14:12 | WARNING  | metal_defect.utils.device | GPU not available — falling back to CPU.
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | Hardware recommendations: {'device': 'cpu', 'batch_size': 2, 'image_size': 416, 'workers': 1, 'amp': False, 'note': 'CPU-only mode. Use small batch and image size.'}
+2026-07-11 12:14:12 | WARNING  | metal_defect.training.trainer | Reducing batch_size from 4 → 2 based on available VRAM.
+2026-07-11 12:14:12 | WARNING  | metal_defect.training.trainer | Reducing imgsz from 640 → 416 based on available VRAM.
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | AMP disabled (CPU training).
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | TRAINING CONFIGURATION
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   data            : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   epochs          : 100
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   batch           : 2
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   imgsz           : 416
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   workers         : 2
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   amp             : False
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   cache           : False
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   device          : cpu
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   optimizer       : AdamW
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   lr0             : 0.001
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   patience        : 30
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   project         : outputs/runs
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer |   name            : defect_v3
+2026-07-11 12:14:12 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:14:13 | INFO     | metal_defect.training.trainer | Loading base model: yolov8n.pt
+2026-07-11 12:14:13 | INFO     | metal_defect.training.trainer | Starting training — this may take a while ...
+2026-07-11 12:14:15 | ERROR    | metal_defect.training.trainer | Training failed: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 562, in get_dataset
+    data = check_det_dataset(self.args.data)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\data\utils.py", line 329, in check_det_dataset
+    raise FileNotFoundError(m)
+FileNotFoundError: 
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found ⚠️, missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Metal_Defects\Metal_Defects_Detection\src\training\trainer.py", line 144, in train
+    results = model.train(**params)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\model.py", line 799, in train
+    self.trainer = (trainer or self._smart_load("trainer"))(overrides=args, _callbacks=self.callbacks)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 133, in __init__
+    self.trainset, self.testset = self.get_dataset()
+                                  ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 566, in get_dataset
+    raise RuntimeError(emojis(f"Dataset '{clean_url(self.args.data)}' error ❌ {e}")) from e
+RuntimeError: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+2026-07-11 12:14:15 | ERROR    | metal_defect.__main__ | Training runtime error: Training failed: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 562, in get_dataset
+    data = check_det_dataset(self.args.data)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\data\utils.py", line 329, in check_det_dataset
+    raise FileNotFoundError(m)
+FileNotFoundError: 
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found ⚠️, missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Metal_Defects\Metal_Defects_Detection\src\training\trainer.py", line 144, in train
+    results = model.train(**params)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\model.py", line 799, in train
+    self.trainer = (trainer or self._smart_load("trainer"))(overrides=args, _callbacks=self.callbacks)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 133, in __init__
+    self.trainset, self.testset = self.get_dataset()
+                                  ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 566, in get_dataset
+    raise RuntimeError(emojis(f"Dataset '{clean_url(self.args.data)}' error ❌ {e}")) from e
+RuntimeError: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Metal_Defects\Metal_Defects_Detection\scripts\train.py", line 132, in main
+    result = trainer.train()
+  File "D:\Metal_Defects\Metal_Defects_Detection\src\training\trainer.py", line 147, in train
+    raise RuntimeError(f"Training failed: {e}") from e
+RuntimeError: Training failed: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+2026-07-11 12:16:07 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:16:07 | INFO     | metal_defect | Logging initialized
+2026-07-11 12:16:07 | INFO     | metal_defect |   Level    : INFO
+2026-07-11 12:16:07 | INFO     | metal_defect |   Log file : outputs\logs\metal_defect.log
+2026-07-11 12:16:07 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:16:07 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:16:07 | INFO     | metal_defect.__main__ | METAL DEFECT DETECTION — Dataset Validation
+2026-07-11 12:16:07 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:16:07 | INFO     | metal_defect.utils.config | Config loaded from: D:\Metal_Defects\Metal_Defects_Detection\config\config.yaml
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator | DATASET VALIDATION STARTED
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator |   Dataset Root : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator |   YAML Path    : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator | Checking data.yaml ...
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator | data.yaml: ✓  nc=1  classes=['defect']
+2026-07-11 12:16:07 | INFO     | metal_defect.data.validator | Validating split 'train': dataset_merged\train\images
+2026-07-11 12:16:38 | INFO     | metal_defect.data.validator |   train  → images: 26867 | labels: 26867 | annotations: 62494 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:16:38 | INFO     | metal_defect.data.validator | Validating split 'val': dataset_merged\valid\images
+2026-07-11 12:16:40 | INFO     | metal_defect.data.validator |   val    → images: 3346 | labels: 3346 | annotations: 4342 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:16:40 | INFO     | metal_defect.data.validator | Validating split 'test': dataset_merged\test\images
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   test   → images: 3311 | labels: 3311 | annotations: 1974 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator | DATASET VALIDATION REPORT
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   Dataset Root  : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   YAML Valid    : True
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   Classes       : 1 → ['defect']
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   Total Images  : 33524
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   Split 'train' [✓ OK]
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Images       : 26867
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Labels       : 26867
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Annotations  : 62494
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |       [0] defect                    : 62494
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   Split 'val' [✓ OK]
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Images       : 3346
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Labels       : 3346
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Annotations  : 4342
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |       [0] defect                    : 4342
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   Split 'test' [✓ OK]
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Images       : 3311
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Labels       : 3311
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Annotations  : 1974
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |       [0] defect                    : 1974
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator |   RESULT: ✓  DATASET IS VALID — Ready for training.
+2026-07-11 12:16:41 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:16:41 | INFO     | metal_defect.__main__ | 
+✓  Dataset validation PASSED. Ready to train.
+
+2026-07-11 12:17:01 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:17:01 | INFO     | metal_defect | Logging initialized
+2026-07-11 12:17:01 | INFO     | metal_defect |   Level    : INFO
+2026-07-11 12:17:01 | INFO     | metal_defect |   Log file : outputs\logs\metal_defect.log
+2026-07-11 12:17:01 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.__main__ | METAL DEFECT DETECTION — Training Pipeline
+2026-07-11 12:17:02 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.config | Config loaded from: D:\Metal_Defects\Metal_Defects_Detection\config\config.yaml
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device | HARDWARE CONFIGURATION
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device |   PyTorch Version   : 2.13.0+cpu
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device |   CUDA Available    : False
+2026-07-11 12:17:02 | WARNING  | metal_defect.utils.device |   ⚠  No CUDA-capable GPU detected.
+2026-07-11 12:17:02 | WARNING  | metal_defect.utils.device |      Training and inference will run on CPU.
+2026-07-11 12:17:02 | WARNING  | metal_defect.utils.device |      Expect significantly slower performance.
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device |   Selected Device   : cpu
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device |   RAM Total         : 102.30 GB
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device |   RAM Available     : 52.39 GB
+2026-07-11 12:17:02 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.__main__ | Running dataset validation before training ...
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator | DATASET VALIDATION STARTED
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator |   Dataset Root : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator |   YAML Path    : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator | Checking data.yaml ...
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator | data.yaml: ✓  nc=1  classes=['defect']
+2026-07-11 12:17:02 | INFO     | metal_defect.data.validator | Validating split 'train': dataset_merged\train\images
+2026-07-11 12:17:34 | INFO     | metal_defect.data.validator |   train  → images: 26867 | labels: 26867 | annotations: 62494 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:17:34 | INFO     | metal_defect.data.validator | Validating split 'val': dataset_merged\valid\images
+2026-07-11 12:17:36 | INFO     | metal_defect.data.validator |   val    → images: 3346 | labels: 3346 | annotations: 4342 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:17:36 | INFO     | metal_defect.data.validator | Validating split 'test': dataset_merged\test\images
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   test   → images: 3311 | labels: 3311 | annotations: 1974 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator | DATASET VALIDATION REPORT
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   Dataset Root  : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   YAML Valid    : True
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   Classes       : 1 → ['defect']
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   Total Images  : 33524
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   Split 'train' [✓ OK]
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Images       : 26867
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Labels       : 26867
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Annotations  : 62494
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |       [0] defect                    : 62494
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   Split 'val' [✓ OK]
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Images       : 3346
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Labels       : 3346
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Annotations  : 4342
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |       [0] defect                    : 4342
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   Split 'test' [✓ OK]
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Images       : 3311
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Labels       : 3311
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Annotations  : 1974
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |       [0] defect                    : 1974
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator |   RESULT: ✓  DATASET IS VALID — Ready for training.
+2026-07-11 12:17:37 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:17:37 | INFO     | metal_defect.__main__ | Dataset validation passed. Proceeding to training.
+
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | ============================================================
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | TRAINING PIPELINE STARTED
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | ============================================================
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device | HARDWARE CONFIGURATION
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device |   PyTorch Version   : 2.13.0+cpu
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device |   CUDA Available    : False
+2026-07-11 12:17:37 | WARNING  | metal_defect.utils.device |   ⚠  No CUDA-capable GPU detected.
+2026-07-11 12:17:37 | WARNING  | metal_defect.utils.device |      Training and inference will run on CPU.
+2026-07-11 12:17:37 | WARNING  | metal_defect.utils.device |      Expect significantly slower performance.
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device |   Selected Device   : cpu
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device |   RAM Total         : 102.30 GB
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device |   RAM Available     : 52.28 GB
+2026-07-11 12:17:37 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:17:37 | WARNING  | metal_defect.utils.device | GPU not available — falling back to CPU.
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | Hardware recommendations: {'device': 'cpu', 'batch_size': 2, 'image_size': 416, 'workers': 1, 'amp': False, 'note': 'CPU-only mode. Use small batch and image size.'}
+2026-07-11 12:17:37 | WARNING  | metal_defect.training.trainer | Reducing batch_size from 4 → 2 based on available VRAM.
+2026-07-11 12:17:37 | WARNING  | metal_defect.training.trainer | Reducing imgsz from 640 → 416 based on available VRAM.
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | AMP disabled (CPU training).
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | TRAINING CONFIGURATION
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   data            : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   epochs          : 100
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   batch           : 2
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   imgsz           : 416
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   workers         : 2
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   amp             : False
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   cache           : False
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   device          : cpu
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   optimizer       : AdamW
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   lr0             : 0.001
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   patience        : 30
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   project         : outputs/runs
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer |   name            : defect_v3
+2026-07-11 12:17:37 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:17:38 | INFO     | metal_defect.training.trainer | Loading base model: yolov8n.pt
+2026-07-11 12:17:38 | INFO     | metal_defect.training.trainer | Starting training — this may take a while ...
+2026-07-11 12:17:39 | ERROR    | metal_defect.training.trainer | Training failed: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 562, in get_dataset
+    data = check_det_dataset(self.args.data)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\data\utils.py", line 329, in check_det_dataset
+    raise FileNotFoundError(m)
+FileNotFoundError: 
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found ⚠️, missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Metal_Defects\Metal_Defects_Detection\src\training\trainer.py", line 144, in train
+    results = model.train(**params)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\model.py", line 799, in train
+    self.trainer = (trainer or self._smart_load("trainer"))(overrides=args, _callbacks=self.callbacks)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 133, in __init__
+    self.trainset, self.testset = self.get_dataset()
+                                  ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 566, in get_dataset
+    raise RuntimeError(emojis(f"Dataset '{clean_url(self.args.data)}' error ❌ {e}")) from e
+RuntimeError: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+2026-07-11 12:17:39 | ERROR    | metal_defect.__main__ | Training runtime error: Training failed: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 562, in get_dataset
+    data = check_det_dataset(self.args.data)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\data\utils.py", line 329, in check_det_dataset
+    raise FileNotFoundError(m)
+FileNotFoundError: 
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found ⚠️, missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Metal_Defects\Metal_Defects_Detection\src\training\trainer.py", line 144, in train
+    results = model.train(**params)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\model.py", line 799, in train
+    self.trainer = (trainer or self._smart_load("trainer"))(overrides=args, _callbacks=self.callbacks)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 133, in __init__
+    self.trainset, self.testset = self.get_dataset()
+                                  ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Admin\AppData\Roaming\Python\Python314\site-packages\ultralytics\engine\trainer.py", line 566, in get_dataset
+    raise RuntimeError(emojis(f"Dataset '{clean_url(self.args.data)}' error ❌ {e}")) from e
+RuntimeError: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Metal_Defects\Metal_Defects_Detection\scripts\train.py", line 132, in main
+    result = trainer.train()
+  File "D:\Metal_Defects\Metal_Defects_Detection\src\training\trainer.py", line 147, in train
+    raise RuntimeError(f"Training failed: {e}") from e
+RuntimeError: Training failed: Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' error  
+Dataset 'D://Metal_Defects/Metal_Defects_Detection/dataset_merged/data.yaml' images not found , missing path 'D:\Internship\Metal_Defects\dataset_merged\valid\images'
+Note dataset download directory is 'D:\Metal_Defects\Metal_Defects_Detection'. You can update this in 'C:\Users\Admin\AppData\Roaming\Ultralytics\settings.json'
+2026-07-11 12:21:29 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:21:29 | INFO     | metal_defect | Logging initialized
+2026-07-11 12:21:29 | INFO     | metal_defect |   Level    : INFO
+2026-07-11 12:21:29 | INFO     | metal_defect |   Log file : outputs\logs\metal_defect.log
+2026-07-11 12:21:29 | INFO     | metal_defect | ======================================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.__main__ | METAL DEFECT DETECTION — Training Pipeline
+2026-07-11 12:21:30 | INFO     | metal_defect.__main__ | ============================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.config | Config loaded from: D:\Metal_Defects\Metal_Defects_Detection\config\config.yaml
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device | HARDWARE CONFIGURATION
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device |   PyTorch Version   : 2.13.0+cpu
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device |   CUDA Available    : False
+2026-07-11 12:21:30 | WARNING  | metal_defect.utils.device |   ⚠  No CUDA-capable GPU detected.
+2026-07-11 12:21:30 | WARNING  | metal_defect.utils.device |      Training and inference will run on CPU.
+2026-07-11 12:21:30 | WARNING  | metal_defect.utils.device |      Expect significantly slower performance.
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device |   Selected Device   : cpu
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device |   RAM Total         : 102.30 GB
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device |   RAM Available     : 52.05 GB
+2026-07-11 12:21:30 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.__main__ | Running dataset validation before training ...
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator | DATASET VALIDATION STARTED
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator |   Dataset Root : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator |   YAML Path    : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator | Checking data.yaml ...
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator | data.yaml: ✓  nc=1  classes=['defect']
+2026-07-11 12:21:30 | INFO     | metal_defect.data.validator | Validating split 'train': dataset_merged\train\images
+2026-07-11 12:22:02 | INFO     | metal_defect.data.validator |   train  → images: 26867 | labels: 26867 | annotations: 62494 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:22:02 | INFO     | metal_defect.data.validator | Validating split 'val': dataset_merged\valid\images
+2026-07-11 12:22:04 | INFO     | metal_defect.data.validator |   val    → images: 3346 | labels: 3346 | annotations: 4342 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:22:04 | INFO     | metal_defect.data.validator | Validating split 'test': dataset_merged\test\images
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   test   → images: 3311 | labels: 3311 | annotations: 1974 | missing: 0 | corrupt: 0 | invalid: 0
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator | DATASET VALIDATION REPORT
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   Dataset Root  : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   YAML Valid    : True
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   Classes       : 1 → ['defect']
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   Total Images  : 33524
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   Split 'train' [✓ OK]
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Images       : 26867
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Labels       : 26867
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Annotations  : 62494
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |       [0] defect                    : 62494
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   Split 'val' [✓ OK]
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Images       : 3346
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Labels       : 3346
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Annotations  : 4342
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |       [0] defect                    : 4342
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   Split 'test' [✓ OK]
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Images       : 3311
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Labels       : 3311
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Annotations  : 1974
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |     Class dist.  :
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |       [0] defect                    : 1974
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator | 
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator |   RESULT: ✓  DATASET IS VALID — Ready for training.
+2026-07-11 12:22:05 | INFO     | metal_defect.data.validator | ============================================================
+2026-07-11 12:22:05 | INFO     | metal_defect.__main__ | Dataset validation passed. Proceeding to training.
+
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | ============================================================
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | TRAINING PIPELINE STARTED
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | ============================================================
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device | HARDWARE CONFIGURATION
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device |   PyTorch Version   : 2.13.0+cpu
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device |   CUDA Available    : False
+2026-07-11 12:22:05 | WARNING  | metal_defect.utils.device |   ⚠  No CUDA-capable GPU detected.
+2026-07-11 12:22:05 | WARNING  | metal_defect.utils.device |      Training and inference will run on CPU.
+2026-07-11 12:22:05 | WARNING  | metal_defect.utils.device |      Expect significantly slower performance.
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device |   Selected Device   : cpu
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device |   RAM Total         : 102.30 GB
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device |   RAM Available     : 51.85 GB
+2026-07-11 12:22:05 | INFO     | metal_defect.utils.device | ============================================================
+2026-07-11 12:22:05 | WARNING  | metal_defect.utils.device | GPU not available — falling back to CPU.
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | Hardware recommendations: {'device': 'cpu', 'batch_size': 2, 'image_size': 416, 'workers': 1, 'amp': False, 'note': 'CPU-only mode. Use small batch and image size.'}
+2026-07-11 12:22:05 | WARNING  | metal_defect.training.trainer | Reducing batch_size from 4 → 2 based on available VRAM.
+2026-07-11 12:22:05 | WARNING  | metal_defect.training.trainer | Reducing imgsz from 640 → 416 based on available VRAM.
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | AMP disabled (CPU training).
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | TRAINING CONFIGURATION
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   data            : D:\Metal_Defects\Metal_Defects_Detection\dataset_merged\data.yaml
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   epochs          : 100
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   batch           : 2
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   imgsz           : 416
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   workers         : 2
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   amp             : False
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   cache           : False
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   device          : cpu
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   optimizer       : AdamW
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   lr0             : 0.001
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   patience        : 30
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   project         : outputs/runs
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer |   name            : defect_v3
+2026-07-11 12:22:05 | INFO     | metal_defect.training.trainer | ------------------------------------------------------------
+2026-07-11 12:22:06 | INFO     | metal_defect.training.trainer | Loading base model: yolov8n.pt
+2026-07-11 12:22:06 | INFO     | metal_defect.training.trainer | Starting training — this may take a while ...

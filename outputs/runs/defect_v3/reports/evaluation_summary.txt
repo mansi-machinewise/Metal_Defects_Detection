@@ -1,0 +1,23 @@
+============================================================
+METAL DEFECT DETECTION — EVALUATION REPORT
+============================================================
+  Model              : outputs\runs\defect_detection_v1\weights\best.pt
+  Device             : cpu
+  Confidence Thresh  : 0.45
+  BAD Threshold      : 0.45
+
+  RESULTS
+  Total images       : 26
+  GOOD               : 3  (11.5%)
+  BAD                : 23   (88.5%)
+  Failed             : 0
+
+  DEFECTS
+  Total detected     : 83
+  Avg per image      : 3.19
+
+  PERFORMANCE
+  Avg inference      : 81.8 ms
+  Min inference      : 23.5 ms
+  Max inference      : 1448.3 ms
+============================================================
