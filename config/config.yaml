@@ -11,8 +11,8 @@ project:
 # Dataset
 # -----------------------------------------------------------------------------
 dataset:
-  root: "dataset_merged"
-  yaml: "dataset_merged/data.yaml"
+  root: "dataset_multiclass"
+  yaml: "dataset_multiclass/data.yaml"
 
   splits:
     train: "train/images"
@@ -38,7 +38,7 @@ classes:
 # -----------------------------------------------------------------------------
 training:
   training:
-  model: "yolov8s.pt"       # Small — good accuracy/speed balance
+  model: "yolo11m.pt"       # Small — good accuracy/speed balance
   epochs: 150
   batch_size: 8             # Admin PC has 102GB RAM — can handle larger batch
   image_size: 640

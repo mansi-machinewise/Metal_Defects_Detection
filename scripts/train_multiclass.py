@@ -1,4 +1,6 @@
-# scripts/train_multiclass.py
+import os
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
 from ultralytics import YOLO
 from pathlib import Path
 import yaml
@@ -24,17 +26,17 @@ def main():
         print("No GPU found — training on CPU")
         device = "cpu"
 
-    model = YOLO("yolov8m.pt")
+    model = YOLO("yolo11m.pt")
 
     results = model.train(
         data=str(data_yaml),
         epochs=100,
         imgsz=640,
-        batch=4,
+        batch=8,
         lr0=0.01,
         patience=20,
         device=device,
-        workers=2,           # reduced to avoid RAM pressure
+        workers=4,           # reduced to avoid RAM pressure
         project=str(project_root / "outputs" / "runs"),
         name="defect_multiclass_v1",
         cos_lr=True,

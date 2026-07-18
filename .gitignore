@@ -4,6 +4,7 @@
 # Datasets (too large for GitHub)
 dataset/
 dataset_merged/
+dataset_multiclass/
 
 # Model weights
 *.onnx
