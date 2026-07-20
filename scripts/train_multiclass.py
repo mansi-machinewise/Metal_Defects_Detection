@@ -32,7 +32,7 @@ def main():
         data=str(data_yaml),
         epochs=100,
         imgsz=640,
-        batch=8,
+        batch=16,
         lr0=0.01,
         patience=20,
         device=device,
