@@ -29,26 +29,29 @@ def main():
     model = YOLO("yolo11m.pt")
 
     results = model.train(
-        data=str(data_yaml),
-        epochs=100,
-        imgsz=640,
-        batch=16,
-        lr0=0.01,
-        patience=20,
-        device=device,
-        workers=4,           # reduced to avoid RAM pressure
-        project=str(project_root / "outputs" / "runs"),
-        name="defect_multiclass_v1",
-        cos_lr=True,
-        hsv_h=0.015,
-        hsv_s=0.7,
-        hsv_v=0.4,
-        fliplr=0.5,
-        flipud=0.1,
-        degrees=10.0,
-        cache=False,         # disabled — not enough free RAM
-    )
-
+    data=str(data_yaml),
+    epochs=100,
+    imgsz=640,
+    batch=16,
+    optimizer='AdamW',
+    lr0=0.001,
+    lrf=0.01,
+    patience=30,
+    device=device,
+    workers=4,
+    project=str(project_root / "outputs" / "runs"),
+    name="NEU_yolo11m_AdamW_v1",
+    cos_lr=True,
+    hsv_h=0.015,
+    hsv_s=0.8,
+    hsv_v=0.5,
+    fliplr=0.5,
+    flipud=0.3,
+    degrees=15.0,
+    scale=0.6,
+    mixup=0.1,
+    cache=False,
+)
     print(f"\nTraining complete")
     print(f"Best weights: {project_root}/outputs/runs/defect_multiclass_v1/weights/best.pt")
 
