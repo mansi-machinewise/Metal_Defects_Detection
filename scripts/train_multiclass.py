@@ -26,7 +26,7 @@ def main():
         print("No GPU found — training on CPU")
         device = "cpu"
 
-    model = YOLO("yolo11m.pt")
+    model = YOLO("yolo11s.pt")
 
     results = model.train(
     data=str(data_yaml),
@@ -40,7 +40,7 @@ def main():
     device=device,
     workers=4,
     project=str(project_root / "outputs" / "runs"),
-    name="NEU_yolo11m_AdamW_v1",
+    name="NEU_Metal_yolo11s_AdamW_v1",
     cos_lr=True,
     hsv_h=0.015,
     hsv_s=0.8,
