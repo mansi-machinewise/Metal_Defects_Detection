@@ -13,7 +13,7 @@ opencv-python-headless==4.10.0.84   # OpenCV without GUI (use full if displaying
 Pillow>=10.0.0
 
 # Data & Configuration
-numpy>=1.24.0
+numpy==1.26.4
 pandas>=2.0.0
 pyyaml>=6.0
 python-dotenv>=1.0.0
