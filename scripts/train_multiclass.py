@@ -26,7 +26,7 @@ def main():
         print("No GPU found — training on CPU")
         device = "cpu"
 
-    model = YOLO("yolo11s.pt")
+    model = YOLO("yolo11m.pt")
 
     results = model.train(
     data=str(data_yaml),
@@ -35,21 +35,22 @@ def main():
     batch=16,
     optimizer='AdamW',
     lr0=0.001,
-    lrf=0.01,
-    patience=30,
+    lrf=0.1,
+    patience=50,
     device=device,
     workers=4,
     project=str(project_root / "outputs" / "runs"),
-    name="NEU_Metal_yolo11s_AdamW_v1",
+    name="NEU_Metal_yolo11m_AdamW_v2",
     cos_lr=True,
+    single_cls=False,
     hsv_h=0.015,
-    hsv_s=0.8,
+    hsv_s=0.5,
     hsv_v=0.5,
     fliplr=0.5,
     flipud=0.3,
     degrees=15.0,
     scale=0.6,
-    mixup=0.1,
+    mixup=0.0,
     cache=False,
 )
     print(f"\nTraining complete")

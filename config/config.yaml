@@ -46,7 +46,7 @@ inference:
   iou_threshold: 0.45
   max_allowed_defects: 0
   max_detections: 50
-  model_path: outputs/runs/NEU_Metal_yolo11s_AdamW_v1/weights/best.pt
+  model_path: outputs/runs/NEU_Metal_yolo11m_AdamW_v2/weights/best.pt
 logging:
   date_format: '%Y-%m-%d %H:%M:%S'
   format: '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s'
@@ -60,18 +60,18 @@ project:
 training:
   amp: false
   augmentation:
-    copy_paste: 0.0
-    degrees: 10
-    erasing: 0.2
-    fliplr: 0.5
-    flipud: 0.5
     hsv_h: 0.01
     hsv_s: 0.5
     hsv_v: 0.4
-    mixup: 0.0
-    mosaic: 1.0
-    scale: 0.5
+    degrees: 10
     translate: 0.1
+    scale: 0.5
+    flipud: 0.3
+    fliplr: 0.5
+    mosaic: 1.0
+    mixup: 0.0
+    copy_paste: 0.0
+    erasing: 0.1
   batch_size: 8
   box: 7.5
   cache: false
@@ -81,16 +81,21 @@ training:
   exist_ok: true
   image_size: 640
   lr0: 0.001
-  lrf: 0.01
-  model: yolo11s.pt
+  lrf: 0.1
+  model: yolo11m.pt
   momentum: 0.937
   optimizer: AdamW
-  patience: 30
+  patience: 50
   project: outputs/runs
-  run_name: NEU_Metal_yolo11s_AdamW_v1
+  run_name: NEU_Metal_yolo11m_AdamW_v2
   save_period: 10
-  single_cls: true
+  single_cls: false
   training: null
   warmup_epochs: 3
   weight_decay: 0.0005
   workers: 4
+  cos_lr: true
+  box: 7.5
+  cls: 2.0
+  dfl: 1.5
+  
