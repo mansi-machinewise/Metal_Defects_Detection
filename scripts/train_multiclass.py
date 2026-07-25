@@ -30,7 +30,7 @@ def main():
 
     results = model.train(
     data=str(data_yaml),
-    epochs=100,
+    epochs=150,
     imgsz=640,
     batch=16,
     optimizer='AdamW',
@@ -54,7 +54,7 @@ def main():
     cache=False,
 )
     print(f"\nTraining complete")
-    print(f"Best weights: {project_root}/outputs/runs/defect_multiclass_v1/weights/best.pt")
+    print(f"Best weights: {project_root}/outputs/runs/NEU_Metal_yolo11m_AdamW_v2/weights/best.pt")
 
 if __name__ == '__main__':
     main()
