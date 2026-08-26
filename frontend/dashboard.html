@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inspection Result — Metal Defect Detection</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
@@ -23,13 +20,9 @@
       <span>Metal Defect Detection</span>
     </a>
     <div class="step-indicator">
-      <span class="step">
-        <i class="fa-solid fa-check"></i> Upload
-      </span>
+      <span class="step"><i class="fa-solid fa-check"></i> Upload</span>
       <span class="step-line"></span>
-      <span class="step active">
-        <i class="fa-solid fa-circle-2"></i> Result
-      </span>
+      <span class="step active"><i class="fa-solid fa-circle-2"></i> Result</span>
     </div>
   </header>
 
@@ -42,6 +35,7 @@
 
     <!-- Image comparison panel -->
     <section class="image-panel fade-in delay-2">
+
       <div class="image-card">
         <div class="image-card-header">
           <i class="fa-solid fa-image"></i>
@@ -52,47 +46,42 @@
         </div>
       </div>
 
-      <div class="image-card">
+      <!-- Detection card — click to open fullscreen lightbox -->
+      <div class="image-card detection-card" id="detectionCard" title="Click to zoom in">
         <div class="image-card-header">
           <i class="fa-solid fa-magnifying-glass-chart"></i>
           <span>Detection Result</span>
-          <span class="badge-soon" title="YOLOv8 overlay will render here once the backend is connected">
-            Placeholder
+          <span class="badge-zoom">
+            <i class="fa-solid fa-up-right-and-down-left-from-center"></i> Click to Zoom
           </span>
         </div>
         <div class="image-frame">
-          <img id="detectionImage" src="" alt="Detection result preview" />
+          <img id="detectionImage" src="" alt="Detection result" />
+          <div class="zoom-hint-overlay" aria-hidden="true">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
         </div>
       </div>
+
     </section>
 
     <!-- Result cards -->
     <section class="result-cards fade-in delay-3">
-
       <div class="result-card" id="classificationCard">
-        <div class="card-icon">
-          <i class="fa-solid fa-clipboard-check"></i>
-        </div>
+        <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
         <div class="card-label">Classification</div>
         <div class="card-value" id="classificationValue">—</div>
       </div>
-
       <div class="result-card">
-        <div class="card-icon">
-          <i class="fa-solid fa-gauge-high"></i>
-        </div>
+        <div class="card-icon"><i class="fa-solid fa-gauge-high"></i></div>
         <div class="card-label">Confidence</div>
         <div class="card-value" id="confidenceValue">—</div>
       </div>
-
       <div class="result-card">
-        <div class="card-icon">
-          <i class="fa-solid fa-bug"></i>
-        </div>
+        <div class="card-icon"><i class="fa-solid fa-bug"></i></div>
         <div class="card-label">Defect Type</div>
         <div class="card-value" id="defectTypeValue">—</div>
       </div>
-
     </section>
 
     <button class="upload-another-btn fade-in delay-3" id="uploadAnotherBtn" type="button">
@@ -101,6 +90,36 @@
     </button>
 
   </main>
+
+  <!-- ============================================================
+       LIGHTBOX — direct child of <body>, outside <main>
+       ============================================================ -->
+  <div id="lightboxOverlay" class="lb-overlay" role="dialog" aria-modal="true">
+
+    <!-- Close button -->
+    <button id="lightboxClose" class="lb-close" title="Close (Esc)">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Main content row -->
+    <div class="lb-content">
+
+      <!-- Image + SVG overlay wrapper -->
+      <div class="lb-image-col">
+        <div id="lightboxImageWrap" class="lb-image-wrap">
+          <img id="lightboxImage" src="" alt="Zoomed detection result" />
+          <!-- SVG drawn over image to show bounding boxes -->
+          <svg id="bboxSvg" class="bbox-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+      </div>
+
+      <!-- Sidebar hidden but kept for JS references -->
+      <div style="display:none;">
+        <div id="lightboxDefectList" class="lb-defect-list"></div>
+      </div>
+
+    </div>
+  </div>
 
   <script src="dashboard.js"></script>
 </body>

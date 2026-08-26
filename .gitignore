@@ -1,10 +1,13 @@
 # Environment
 .env
+.venv
+.vscode
 
 # Datasets (too large for GitHub)
 dataset/
-dataset_merged/
+dataset_crops/
 dataset_multiclass/
+dataset_classifier/
 
 # Model weights
 *.onnx

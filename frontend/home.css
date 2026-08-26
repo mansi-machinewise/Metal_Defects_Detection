@@ -311,4 +311,5 @@ body {
     position: static;
     margin-top: 48px;
   }
-}
+}  /* ← this closes whatever media query was already open above */
+

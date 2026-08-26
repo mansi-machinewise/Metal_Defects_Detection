@@ -11,14 +11,16 @@ camera:
   source: 0
   width: 1280
   window_name: "Metal Defect Detection \xE2\u20AC\u201D Live Feed"
+
 classes:
   names:
-    - crazing      
+    - crazing
     - inclusion
     - patches
     - pitted_surface
     - rolled-in_scale
     - scratches
+
 dataset:
   image_extensions:
   - .jpg
@@ -37,61 +39,66 @@ dataset:
     train: train/images
     val: valid/images
   yaml: dataset_multiclass/data.yaml
+
 evaluation:
   generate_confusion_matrix: true
   generate_pr_curve: true
   max_vis_samples: 50
   output_dir: outputs/reports
   predictions_dir: outputs/predictions
+
 inference:
   bad_threshold: 0.2
-  confidence_threshold: 0.2
+  confidence_threshold: 0.32
   device: auto
-  image_size: 640
-  iou_threshold: 0.45
+  image_size: 960          # was 800 — bumped for finer crazing/scale detail
+  iou_threshold: 0.3
   max_allowed_defects: 0
-  max_detections: 50
-  model_path: outputs/runs/NEU_Metal_yolo11m_v3_balanced/weights/best.pt
+  max_detections: 5
+  model_path: outputs/runs/NEU_Metal_yolo11m_960_v1-4/weights/best.pt  # update once retrained
+
 logging:
   date_format: '%Y-%m-%d %H:%M:%S'
   format: '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s'
   level: INFO
   log_dir: outputs/logs
   log_file: metal_defect.log
+
 project:
   description: Industrial metal surface defect detection using YOLOv8
   name: MetalDefectDetection
   version: 1.0.0
+
 training:
   amp: false
   augmentation:
-    hsv_h: 0.015  # was 0.01
-    hsv_s: 0.5
-    hsv_v: 0.5    # was 0.4
-    degrees: 15.0  # was 10
-    scale: 0.6    # was 0.5
+    hsv_h: 0.015
+    hsv_s: 0.4          # was 0.5 — slightly gentler, protects subtle texture cues
+    hsv_v: 0.3           # was 0.5 — reduced so crazing/rolled-in_scale contrast isn't washed out
+    degrees: 8.0          # was 15.0 — less rotation distortion on thin crack lines
+    scale: 0.4          # was 0.6 — less aggressive scaling, preserves fine detail
     flipud: 0.3
     fliplr: 0.5
     mosaic: 1.0
     copy_paste: 0.0
-    mixup: 0.1    # was 0.0
-    close_mosaic: 10
-  batch_size: 8
-  box: 7.5
+    mixup: 0.0          # was 0.1 — removed, mixup blurs already-subtle defects
+    close_mosaic: 15         # was 10 — disable mosaic earlier for cleaner final-epoch convergence
+  batch_size: 16          # was 8 — more stable BN/AdamW statistics (lower if VRAM-limited)
+  box: 8.5          # was 7.5 — slightly higher weight on localization (helps the mAP@0.5 vs 0.5:0.95 gap)
   cache: false
   cls: 2.0
   dfl: 1.5
-  epochs: 150
+  epochs: 200          # was 150 — harder classes need more convergence time
   exist_ok: true
-  image_size: 640
+  image_size: 960          # was 800 — matches inference; key lever for crazing detail
   lr0: 0.001
   lrf: 0.1
   model: yolo11m.pt
   momentum: 0.937
   optimizer: AdamW
-  patience: 50
+  patience: 60          # was 50 — a bit more room given higher epoch count
   project: outputs/runs
-  run_name: NEU_Metal_yolo11m_v3_balanced
+  run_name: NEU_Metal_yolo11m_AdamW_v3
   save_period: 10
   single_cls: false
   training: null
@@ -99,4 +106,3 @@ training:
   weight_decay: 0.0005
   workers: 4
   cos_lr: true
- 

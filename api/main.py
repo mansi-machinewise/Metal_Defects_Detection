@@ -51,6 +51,13 @@ async def lifespan(app: FastAPI):
     try:
         service.load()
         logger.info("Model loaded successfully. API is ready.")
+
+        # Load EfficientNetB0 classifier
+        from api.services.classifier_service import ClassifierService
+        classifier = ClassifierService.get_instance()
+        classifier.load(r"D:\Metal_Defects\outputs\classifier\best_classifier.pth")
+        logger.info("Classifier loaded successfully.")
+        
     except Exception as e:
         logger.error("Failed to load model at startup: %s", e)
         logger.error("Check that inference.model_path in config.yaml points to best.pt")

@@ -79,6 +79,7 @@ class DetectionResult:
     model_path: str = ""
     device_used: str = ""
     inference_ms: float = 0.0
+    max_raw_conf: float = 0.0
 
     @property
     def defect_count(self) -> int:
@@ -262,11 +263,12 @@ class DefectDetector:
                 imgsz=self.image_size,
                 device=self.device,
                 max_det=self.max_det,
+                agnostic_nms=True,
                 verbose=False,
                 save=save_annotated,
                 project=str(output_path.parent) if output_path else None,
                 name=output_path.stem if output_path else None,
-            )
+                )
         except Exception as e:
             logger.exception("Inference failed for %s: %s", image_path_str, e)
             raise
@@ -274,7 +276,7 @@ class DefectDetector:
         inference_ms = (time.perf_counter() - start) * 1000
 
         # Parse results
-        defects = self._parse_results(raw_results)
+        defects, max_raw_conf = self._parse_results(raw_results)
 
         # GOOD / BAD decision
         status = self._decide_status(defects)
@@ -287,6 +289,7 @@ class DefectDetector:
             model_path=str(self.model_path),
             device_used=self.device,
             inference_ms=inference_ms,
+            max_raw_conf=max_raw_conf,
         )
 
         logger.info(
@@ -329,21 +332,25 @@ class DefectDetector:
     # Private Helpers
     # ------------------------------------------------------------------
 
-    def _parse_results(self, raw_results: list) -> list[Defect]:
+    def _parse_results(self, raw_results: list) -> tuple[list[Defect], float]:
         """Convert Ultralytics result objects to our Defect data class."""
         defects: list[Defect] = []
+        max_raw_conf = 0.0
 
         for result in raw_results:
             boxes = result.boxes
             if boxes is None or len(boxes) == 0:
                 continue
 
+            # Capture max raw confidence before thresholding
+            if hasattr(boxes, 'conf') and len(boxes.conf) > 0:
+                max_raw_conf = max(max_raw_conf, float(boxes.conf.max().item()))
+
             for box in boxes:
                 cls_id = int(box.cls[0].item())
                 conf = float(box.conf[0].item())
                 x1, y1, x2, y2 = box.xyxy[0].tolist()
 
-                # Get normalized xywh
                 if box.xywhn is not None:
                     cx, cy, w, h = box.xywhn[0].tolist()
                 else:
@@ -367,7 +374,11 @@ class DefectDetector:
                     bbox_xywhn=(cx, cy, w, h),
                 ))
 
-        return defects
+        defects = [
+            d for d in defects
+            if not (d.class_name == "pitted_surface" and d.confidence < 0.35)
+        ]
+        return defects, max_raw_conf
 
     def _decide_status(self, defects: list[Defect]) -> str:
         """

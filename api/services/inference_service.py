@@ -179,28 +179,56 @@ class InferenceService:
         # Run detection
         detection: DetectionResult = self._detector.predict(img_bgr)
 
-        # Draw annotations onto a copy of the image
-        annotated_bgr = self._visualizer.draw(img_bgr, detection)
+        # Refine class predictions using EfficientNetB0 FIRST
+        from api.services.classifier_service import ClassifierService
+        classifier = ClassifierService.get_instance()
 
-        # Encode annotated image to base64 PNG for the frontend
-        annotated_b64 = self._encode_image_b64(annotated_bgr)
+        defect_details = []
+        for d in detection.defects:
+            if classifier.is_loaded:
+                refined_class, refined_conf = classifier.classify(img_bgr, list(d.bbox_xyxy))
+                logger.info("EfficientNet refined: %s → %s (%.2f%%)", d.class_name, refined_class, refined_conf * 100)
+                defect_details.append(DefectDetail(
+                    class_id=d.class_id,
+                    class_name=refined_class,
+                    confidence=refined_conf,
+                    bbox=list(d.bbox_xyxy),
+                ))
+            else:
+                defect_details.append(DefectDetail(
+                    class_id=d.class_id,
+                    class_name=d.class_name,
+                    confidence=d.confidence,
+                    bbox=list(d.bbox_xyxy),
+                ))
 
-        # Build result
-        defect_details = [
-            DefectDetail(
-                class_id=d.class_id,
-                class_name=d.class_name,
-                confidence=d.confidence,
-                bbox=list(d.bbox_xyxy),
-            )
-            for d in detection.defects
+        # Now redraw annotations using REFINED labels
+        detection.defects = [
+            type('Defect', (), {
+                'bbox_xyxy': d.bbox,
+                'class_id':  d.class_id,
+                'class_name': d.class_name,
+                'confidence': d.confidence,
+            })()
+            for d in defect_details
         ]
+        annotated_bgr = self._visualizer.draw(img_bgr, detection)
+        annotated_b64 = self._encode_image_b64(annotated_bgr)
 
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
 
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+
+        if defect_details:
+            avg_confidence = max(d.confidence for d in defect_details)
+        elif detection.status == "GOOD":
+            avg_confidence = 1.0 - detection.max_raw_conf
+        else:
+            avg_confidence = detection.max_confidence
+
         result = InspectionResult(
             status=detection.status,
-            confidence=1.0 if detection.status == "GOOD" and detection.max_confidence == 0 else detection.max_confidence,
+            confidence=avg_confidence,
             defect_type=detection.dominant_defect.class_name if detection.dominant_defect else "No Defect",
             defect_count=detection.defect_count,
             defects=defect_details,

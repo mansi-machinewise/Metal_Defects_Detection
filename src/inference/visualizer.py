@@ -151,7 +151,9 @@ class DefectVisualizer:
 
     def _draw_box(self, canvas: np.ndarray, defect) -> None:
         x1, y1, x2, y2 = [int(v) for v in defect.bbox_xyxy]
-        color = DEFECT_COLORS[defect.class_id % len(DEFECT_COLORS)]
+        CLASS_NAMES = ['crazing', 'inclusion', 'patches', 'pitted_surface', 'rolled-in_scale', 'scratches']
+        class_idx = CLASS_NAMES.index(defect.class_name) if defect.class_name in CLASS_NAMES else defect.class_id
+        color = DEFECT_COLORS[class_idx % len(DEFECT_COLORS)]
 
         cv2.rectangle(canvas, (x1, y1), (x2, y2), color, self.thickness)
 
