@@ -313,3 +313,34 @@ body {
   }
 }  /* ← this closes whatever media query was already open above */
 
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.cta-button-secondary {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  box-shadow: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta-button-secondary:hover {
+  background: rgba(0, 200, 255, 0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 200, 255, 0.15);
+}
+
+@media (min-width: 480px) {
+  .cta-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+}

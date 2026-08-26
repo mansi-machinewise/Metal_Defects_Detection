@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Batch Inspect — Metal Defect Detection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="upload.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="batch-results.css" />
+  <style>
+    /* ── Upload page additions ───────────────────────── */
+    .mode-toggle { display:flex; gap:10px; margin-bottom:32px; }
+    .mode-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 22px; font-family:var(--font);
+      font-size:0.88rem; font-weight:600;
+      border-radius:10px; border:1px solid var(--border-subtle);
+      cursor:pointer; transition:all 0.2s;
+      background:var(--card); color:var(--text-secondary);
+      text-decoration:none;
+    }
+    .mode-btn.active,.mode-btn:hover {
+      background:rgba(0,200,255,0.12);
+      border-color:var(--accent); color:var(--accent);
+    }
+    .batch-info {
+      display:none; align-items:center; gap:10px;
+      margin-top:16px; padding:12px 18px;
+      background:rgba(0,200,255,0.06);
+      border:1px solid var(--border-subtle);
+      border-radius:10px; font-size:0.84rem; color:var(--text-secondary);
+    }
+    .batch-info i { color:var(--accent); }
+    .file-list-preview {
+      width:100%; margin-top:20px; max-height:200px; overflow-y:auto;
+      background:var(--card); border:1px solid var(--border-subtle);
+      border-radius:12px; display:none;
+    }
+    .file-list-item {
+      display:flex; align-items:center; gap:10px;
+      padding:9px 16px; border-bottom:1px solid rgba(0,200,255,0.07);
+      font-size:0.82rem; color:var(--text-secondary);
+    }
+    .file-list-item:last-child { border-bottom:none; }
+    .file-list-item i { color:var(--accent); font-size:0.75rem; }
+    .file-list-item .fname { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .file-list-item .fsize { opacity:0.6; font-size:0.75rem; }
+    .file-list-more {
+      padding:8px 16px; font-size:0.78rem;
+      color:var(--text-secondary); text-align:center;
+      border-top:1px solid var(--border-subtle);
+    }
+    .dropzone-content { display:flex; flex-direction:column; align-items:center; }
+    .preview-content  { display:none; flex-direction:column; align-items:center; }
+
+    /* ── Page views ──────────────────────────────────── */
+    #uploadView  { display:block; }
+    #resultsView { display:none;  }
+  </style>
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════════════════════════════
+     VIEW 1 — UPLOAD
+     ══════════════════════════════════════════════════════ -->
+<div id="uploadView">
+
+  <header class="topbar fade-in">
+    <a href="home.html" class="topbar-brand">
+      <i class="fa-solid fa-industry"></i>
+      <span>Metal Defect Detection</span>
+    </a>
+    <div class="step-indicator">
+      <span class="step active"><i class="fa-solid fa-circle-1"></i> Upload</span>
+      <span class="step-line"></span>
+      <span class="step"><i class="fa-regular fa-circle"></i> Results</span>
+    </div>
+  </header>
+
+  <main class="upload-shell">
+    <section class="upload-intro fade-in delay-1">
+      <h1>Batch Inspection</h1>
+      <p>Select a folder of images to inspect all of them at once.</p>
+    </section>
+
+    <div class="mode-toggle fade-in delay-1">
+      <a href="upload.html" class="mode-btn"><i class="fa-solid fa-image"></i> Single Image</a>
+      <span class="mode-btn active"><i class="fa-solid fa-images"></i> Batch Folder</span>
+    </div>
+
+    <section class="dropzone fade-in delay-2" id="dropzone">
+      <input type="file" id="fileInput"
+        accept=".jpg,.jpeg,.png,.bmp,.webp"
+        multiple webkitdirectory hidden />
+
+      <div class="dropzone-content" id="dropzoneContent">
+        <div class="dropzone-icon"><i class="fa-solid fa-folder-open"></i></div>
+        <h2>Click to select a folder</h2>
+        <p>or drag and drop images here</p>
+        <button class="select-btn" id="selectBtn" type="button">
+          <i class="fa-solid fa-folder-open"></i>
+          <span>Select Folder</span>
+        </button>
+        <p class="formats-note">Supported: JPG, JPEG, PNG, BMP &nbsp;·&nbsp; Max 500 images</p>
+      </div>
+
+      <div class="preview-content" id="previewContent">
+        <div class="dropzone-icon">
+          <i class="fa-solid fa-folder-open" style="color:var(--accent)"></i>
+        </div>
+        <div class="file-meta" style="font-size:1rem;font-weight:600;color:var(--text-primary);margin-top:8px">
+          <i class="fa-solid fa-images" style="color:var(--accent)"></i>
+          <span id="folderName">folder</span>
+        </div>
+        <div class="file-meta" style="margin-top:8px;display:flex;align-items:center;gap:10px">
+          <span id="fileCount" style="color:var(--text-secondary);font-size:0.88rem"></span>
+          <button id="removeBtn" type="button"
+            style="background:rgba(255,75,75,0.15);border:1px solid rgba(255,75,75,0.3);
+                   color:#FF4B4B;border-radius:50%;width:26px;height:26px;
+                   display:flex;align-items:center;justify-content:center;
+                   cursor:pointer;font-size:0.8rem">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="file-list-preview" id="fileListPreview"></div>
+
+    <div class="batch-info" id="batchInfo">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>Images are sent in chunks of 50. Results appear as each chunk completes.</span>
+    </div>
+
+    <p class="error-message" id="errorMessage" style="display:none">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>No valid images found. Please select a folder with JPG, PNG, or BMP files.</span>
+    </p>
+
+    <button class="continue-btn" id="continueBtn" type="button" disabled>
+      <span>Start Batch Inspection</span>
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </main>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     VIEW 2 — RESULTS  (hidden until Continue clicked)
+     ══════════════════════════════════════════════════════ -->
+<div id="resultsView">
+
+  <header class="topbar">
+    <a href="home.html" class="topbar-brand">
+      <i class="fa-solid fa-industry"></i>
+      <span>Metal Defect Detection</span>
+    </a>
+    <div class="topbar-right">
+      <div class="batch-progress-wrap" id="progressWrap">
+        <div class="batch-progress-label" id="progressLabel">Processing…</div>
+        <div class="batch-progress-bar-bg">
+          <div class="batch-progress-bar-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <button class="csv-btn" id="csvBtn" disabled>
+        <i class="fa-solid fa-file-csv"></i> <span>Download CSV</span>
+      </button>
+      <button class="csv-btn" id="backBtn"
+        style="background:var(--card);border-color:var(--border-subtle)">
+        <i class="fa-solid fa-arrow-left"></i> <span>New Batch</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Summary strip -->
+  <div class="summary-strip" id="summaryStrip">
+    <div class="summary-chip">
+      <i class="fa-solid fa-images" style="color:var(--accent)"></i>
+      <span id="sTotal">0</span> Total
+    </div>
+    <div class="summary-chip good">
+      <i class="fa-solid fa-circle-check"></i>
+      <span id="sGood">0</span> Good
+    </div>
+    <div class="summary-chip bad">
+      <i class="fa-solid fa-circle-xmark"></i>
+      <span id="sBad">0</span> Defective
+    </div>
+    <div class="summary-chip" style="margin-left:auto">
+      <i class="fa-solid fa-filter" style="color:var(--accent)"></i>
+      <select id="filterSelect" class="filter-select">
+        <option value="all">All Images</option>
+        <option value="BAD">Defective Only</option>
+        <option value="GOOD">Good Only</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Split layout -->
+  <div class="batch-layout">
+
+    <!-- LEFT: image list -->
+    <aside class="batch-sidebar">
+      <div class="sidebar-inner" id="sidebarInner">
+        <div class="sidebar-empty" id="sidebarEmpty">
+          <i class="fa-solid fa-hourglass-half"></i>
+          <span>Processing images…</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT: viewer -->
+    <main class="batch-viewer">
+
+      <div class="viewer-placeholder" id="viewerPlaceholder">
+        <i class="fa-solid fa-images"></i>
+        <p>Select an image from the list to view results</p>
+      </div>
+
+      <div class="viewer-content" id="viewerContent" style="display:none">
+
+        <section class="dashboard-intro" style="margin-bottom:24px;text-align:left">
+          <h1 id="viewerFilename" style="font-size:1.2rem;font-weight:700;word-break:break-all">—</h1>
+          <p id="viewerSubtitle" style="color:var(--text-secondary);font-size:0.9rem">—</p>
+        </section>
+
+        <section class="image-panel">
+          <div class="image-card">
+            <div class="image-card-header">
+              <i class="fa-solid fa-image"></i>
+              <span>Original Image</span>
+            </div>
+            <div class="image-frame">
+              <img id="viewerOriginal" src="" alt="Original" />
+            </div>
+          </div>
+
+          <div class="image-card detection-card" id="detectionCard" title="Click to zoom">
+            <div class="image-card-header">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+              <span>Detection Result</span>
+              <span class="badge-zoom">
+                <i class="fa-solid fa-up-right-and-down-left-from-center"></i> Click to Zoom
+              </span>
+            </div>
+            <div class="image-frame">
+              <img id="viewerDetection" src="" alt="Detection" />
+              <div class="zoom-hint-overlay" aria-hidden="true">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="result-cards">
+          <div class="result-card" id="classCard">
+            <div class="card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+            <div class="card-label">Classification</div>
+            <div class="card-value" id="viewerClass">—</div>
+          </div>
+          <div class="result-card">
+            <div class="card-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            <div class="card-label">Confidence</div>
+            <div class="card-value" id="viewerConf">—</div>
+          </div>
+          <div class="result-card">
+            <div class="card-icon"><i class="fa-solid fa-bug"></i></div>
+            <div class="card-label">Defect Type</div>
+            <div class="card-value" id="viewerDefectType">—</div>
+          </div>
+        </section>
+
+        <div class="viewer-nav">
+          <button class="nav-btn" id="prevBtn" disabled>
+            <i class="fa-solid fa-arrow-left"></i> Prev
+          </button>
+          <span class="nav-counter" id="navCounter">— / —</span>
+          <button class="nav-btn" id="nextBtn" disabled>
+            Next <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+      </div><!-- /viewer-content -->
+    </main>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightboxOverlay" class="lb-overlay" role="dialog" aria-modal="true">
+    <button id="lightboxClose" class="lb-close" title="Close (Esc)">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="lb-content">
+      <div class="lb-image-col">
+        <div id="lightboxImageWrap" class="lb-image-wrap">
+          <img id="lightboxImage" src="" alt="Zoomed detection result" />
+          <svg id="bboxSvg" class="bbox-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="lb-tip-bottom">
+          <i class="fa-solid fa-hand-pointer"></i>
+          Hover over a box to highlight it in the sidebar
+        </div>
+      </div>
+      <div class="lb-sidebar">
+        <div class="lb-sidebar-title">
+          <i class="fa-solid fa-list-ul"></i> Detections
+        </div>
+        <div class="lb-defect-list" id="lightboxDefectList"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /resultsView -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── Shared state ──────────────────────────────────────────
+  const API        = 'http://127.0.0.1:8000';
+  const CHUNK_SIZE = 50;
+  const ALLOWED_EXT = /\.(jpe?g|png|bmp|webp)$/i;
+  const MAX_FILES   = 500;
+  const PALETTE     = ['#FF4B4B','#00C8FF','#FFD166','#06D6A0','#FF8C42','#C77DFF','#F72585','#4CC9F0'];
+  const colourMap   = {};
+  let   colourIdx   = 0;
+
+  let selectedFiles = [];
+  let results       = [];
+  let currentIdx    = -1;
+  let allDefects    = [];
+  let filterMode    = 'all';
+
+  const getColour = name => {
+    if (!colourMap[name]) colourMap[name] = PALETTE[colourIdx++ % PALETTE.length];
+    return colourMap[name];
+  };
+  const fmtSize = b =>
+    b < 1024 ? `${b} B` : b < 1048576 ? `${(b/1024).toFixed(1)} KB` : `${(b/1048576).toFixed(2)} MB`;
+  const normConf = v => { const n = parseFloat(v)||0; return n > 1 ? n/100 : n; };
+
+  // ── View switching ────────────────────────────────────────
+  const uploadView  = document.getElementById('uploadView');
+  const resultsView = document.getElementById('resultsView');
+
+  function showUploadView() {
+    uploadView.style.display  = 'block';
+    resultsView.style.display = 'none';
+    window.scrollTo(0,0);
+    showIdle();
+  }
+
+  function showResultsView() {
+    uploadView.style.display  = 'none';
+    resultsView.style.display = 'block';
+    window.scrollTo(0,0);
+  }
+
+  // ── UPLOAD VIEW elements ──────────────────────────────────
+  const dropzone        = document.getElementById('dropzone');
+  const fileInput       = document.getElementById('fileInput');
+  const selectBtn       = document.getElementById('selectBtn');
+  const dropzoneContent = document.getElementById('dropzoneContent');
+  const previewContent  = document.getElementById('previewContent');
+  const folderNameEl    = document.getElementById('folderName');
+  const fileCountEl     = document.getElementById('fileCount');
+  const removeBtn       = document.getElementById('removeBtn');
+  const errorMessage    = document.getElementById('errorMessage');
+  const continueBtn     = document.getElementById('continueBtn');
+  const fileListPreview = document.getElementById('fileListPreview');
+  const batchInfo       = document.getElementById('batchInfo');
+
+  function showIdle() {
+    dropzoneContent.style.display = 'flex';
+    previewContent.style.display  = 'none';
+    fileListPreview.style.display = 'none';
+    fileListPreview.innerHTML     = '';
+    batchInfo.style.display       = 'none';
+    errorMessage.style.display    = 'none';
+    continueBtn.disabled          = true;
+    selectedFiles                 = [];
+    fileInput.value               = '';
+  }
+
+  function showSelected(files) {
+    selectedFiles = files;
+    const path   = files[0].webkitRelativePath || files[0].name;
+    const folder = path.includes('/') ? path.split('/')[0] : 'Selected files';
+    folderNameEl.textContent = folder;
+    fileCountEl.textContent  = `${files.length} image${files.length!==1?'s':''} selected`;
+    dropzoneContent.style.display = 'none';
+    previewContent.style.display  = 'flex';
+    batchInfo.style.display       = 'flex';
+    errorMessage.style.display    = 'none';
+    continueBtn.disabled          = false;
+    renderFileList(files);
+  }
+
+  function renderFileList(files) {
+    fileListPreview.innerHTML = '';
+    files.slice(0,10).forEach(f => {
+      const d = document.createElement('div');
+      d.className = 'file-list-item';
+      d.innerHTML = `<i class="fa-solid fa-file-image"></i>
+        <span class="fname">${f.name}</span>
+        <span class="fsize">${fmtSize(f.size)}</span>`;
+      fileListPreview.appendChild(d);
+    });
+    if (files.length > 10) {
+      const m = document.createElement('div');
+      m.className = 'file-list-more';
+      m.textContent = `+ ${files.length-10} more images`;
+      fileListPreview.appendChild(m);
+    }
+    fileListPreview.style.display = 'block';
+  }
+
+  function handleFiles(rawFiles) {
+    const valid = [...rawFiles].filter(f =>
+      ALLOWED_EXT.test(f.name) || (f.type && f.type.startsWith('image/'))
+    ).slice(0, MAX_FILES);
+    if (!valid.length) { errorMessage.style.display='flex'; return; }
+    showSelected(valid);
+  }
+
+  selectBtn.addEventListener('click', e => { e.stopPropagation(); fileInput.click(); });
+  dropzone.addEventListener('click', e => {
+    if (previewContent.style.display==='none' && e.target!==selectBtn && !selectBtn.contains(e.target))
+      fileInput.click();
+  });
+  fileInput.addEventListener('change', e => { if (e.target.files.length) handleFiles(e.target.files); });
+  removeBtn.addEventListener('click',  e => { e.stopPropagation(); showIdle(); });
+
+  ['dragenter','dragover'].forEach(ev => dropzone.addEventListener(ev, e => {
+    e.preventDefault(); dropzone.classList.add('drag-active');
+  }));
+  ['dragleave','drop'].forEach(ev => dropzone.addEventListener(ev, e => {
+    e.preventDefault(); dropzone.classList.remove('drag-active');
+  }));
+  dropzone.addEventListener('drop', e => { if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files); });
+
+  continueBtn.addEventListener('click', () => {
+    if (!selectedFiles.length) return;
+    // Switch to results view — files stay in memory, no navigation
+    results    = [];
+    currentIdx = -1;
+    allDefects = [];
+    showResultsView();
+    startProcessing();
+  });
+
+  document.getElementById('backBtn').addEventListener('click', showUploadView);
+
+  // ── RESULTS VIEW elements ─────────────────────────────────
+  const progressLabel   = document.getElementById('progressLabel');
+  const progressFill    = document.getElementById('progressFill');
+  const csvBtn          = document.getElementById('csvBtn');
+  const sTotal          = document.getElementById('sTotal');
+  const sGood           = document.getElementById('sGood');
+  const sBad            = document.getElementById('sBad');
+  const filterSelect    = document.getElementById('filterSelect');
+  const sidebarInner    = document.getElementById('sidebarInner');
+  const sidebarEmpty    = document.getElementById('sidebarEmpty');
+  const viewerPlaceholder = document.getElementById('viewerPlaceholder');
+  const viewerContent   = document.getElementById('viewerContent');
+  const viewerFilename  = document.getElementById('viewerFilename');
+  const viewerSubtitle  = document.getElementById('viewerSubtitle');
+  const viewerOriginal  = document.getElementById('viewerOriginal');
+  const viewerDetection = document.getElementById('viewerDetection');
+  const classCard       = document.getElementById('classCard');
+  const viewerClass     = document.getElementById('viewerClass');
+  const viewerConf      = document.getElementById('viewerConf');
+  const viewerDefectType= document.getElementById('viewerDefectType');
+  const prevBtn         = document.getElementById('prevBtn');
+  const nextBtn         = document.getElementById('nextBtn');
+  const navCounter      = document.getElementById('navCounter');
+  const detectionCard   = document.getElementById('detectionCard');
+  const lightboxOverlay = document.getElementById('lightboxOverlay');
+  const lightboxClose   = document.getElementById('lightboxClose');
+  const lightboxImage   = document.getElementById('lightboxImage');
+  const bboxSvg         = document.getElementById('bboxSvg');
+  const lbDefectList    = document.getElementById('lightboxDefectList');
+
+  // ── Processing ────────────────────────────────────────────
+  async function startProcessing() {
+    sidebarInner.innerHTML = '';
+    sidebarEmpty.style.display = 'flex';
+    sidebarInner.appendChild(sidebarEmpty);
+    updateProgress(0, selectedFiles.length);
+    csvBtn.disabled = true;
+
+    // Seed sidebar with pending placeholders
+    sidebarEmpty.style.display = 'none';
+    selectedFiles.forEach((file, i) => {
+      sidebarInner.appendChild(makeSidebarItem(i, file.name));
+    });
+
+    let processed = 0;
+    const total   = selectedFiles.length;
+
+    for (let i = 0; i < selectedFiles.length; i += CHUNK_SIZE) {
+      const chunk = selectedFiles.slice(i, i + CHUNK_SIZE);
+      await processChunk(chunk, i);
+      processed += chunk.length;
+      updateProgress(processed, total);
+    }
+
+    progressLabel.textContent = `Done — ${total} image${total!==1?'s':''} processed`;
+    progressFill.style.width  = '100%';
+    csvBtn.disabled = results.length === 0;
+
+    if (results.length > 0) showResult(0);
+  }
+
+  async function processChunk(files, startIdx) {
+    const dataUrls = await Promise.all(files.map(readFileAsDataURL));
+    const form = new FormData();
+    files.forEach(f => form.append('files', f));
+
+    let chunkData;
+    try {
+      const res = await fetch(`${API}/api/inspect/batch`, { method:'POST', body:form });
+      if (!res.ok) throw new Error(`Server ${res.status}`);
+      chunkData = await res.json();
+    } catch(err) {
+      files.forEach((f, j) => {
+        const gi = startIdx + j;
+        results.push({ globalIdx:gi, file:f, data:null, imageDataUrl:dataUrls[j], error:err.message });
+        updateSidebarItem(gi, null, dataUrls[j], true);
+      });
+      updateSummary();
+      return;
+    }
+
+    const resultMap = {};
+    (chunkData.results || []).forEach(r => {
+      const shortName = r.filename.includes('/') 
+        ? r.filename.split('/').pop() 
+        : r.filename;
+      resultMap[shortName] = r;
+    });
+
+    files.forEach((f, j) => {
+      const gi   = startIdx + j;
+      const data = resultMap[f.name] || null;
+      results.push({ globalIdx:gi, file:f, data, imageDataUrl:dataUrls[j], error:null });
+      updateSidebarItem(gi, data, dataUrls[j], false);
+    });
+
+    updateSummary();
+  }
+
+  // ── Sidebar ───────────────────────────────────────────────
+  function makeSidebarItem(idx, fname) {
+    const item = document.createElement('div');
+    item.className    = 'sidebar-item';
+    item.dataset.idx  = idx;
+    item.innerHTML = `
+      <div class="sidebar-thumb-placeholder" id="thumb-${idx}">
+        <i class="fa-solid fa-image"></i>
+      </div>
+      <div class="sidebar-info">
+        <div class="sidebar-fname" title="${fname}">${fname}</div>
+        <div class="sidebar-meta" id="meta-${idx}">Queued</div>
+      </div>
+      <span class="sidebar-badge pending" id="badge-${idx}">…</span>`;
+    item.addEventListener('click', () => {
+      const ri = results.findIndex(r => r.globalIdx === idx);
+      if (ri !== -1) showResult(ri);
+    });
+    return item;
+  }
+
+  function updateSidebarItem(gi, data, dataUrl, isError) {
+    const badge = document.getElementById(`badge-${gi}`);
+    const meta  = document.getElementById(`meta-${gi}`);
+    const thumb = document.getElementById(`thumb-${gi}`);
+
+    if (dataUrl && thumb) {
+      const img = document.createElement('img');
+      img.className = 'sidebar-thumb';
+      img.src = dataUrl; img.alt = '';
+      thumb.replaceWith(img);
+    }
+    if (isError || !data) {
+      if (badge) { badge.textContent='ERR'; badge.className='sidebar-badge bad'; }
+      if (meta)  meta.textContent = 'Failed';
+      return;
+    }
+    const good = data.status === 'GOOD';
+    if (badge) { badge.textContent = good?'GOOD':'BAD'; badge.className=`sidebar-badge ${good?'good':'bad'}`; }
+    if (meta)  meta.textContent = good ? 'No defects'
+      : (data.defects||[]).slice(0,2).join(', ') || 'Defect detected';
+  }
+
+  function updateSummary() {
+    const good = results.filter(r => r.data && r.data.status==='GOOD').length;
+    const bad  = results.filter(r => r.data && r.data.status==='BAD').length;
+    sTotal.textContent = results.length;
+    sGood.textContent  = good;
+    sBad.textContent   = bad;
+    applyFilter();
+  }
+
+  function updateProgress(done, total) {
+    const pct = total > 0 ? Math.round((done/total)*100) : 0;
+    progressFill.style.width  = `${pct}%`;
+    progressLabel.textContent = `Processing ${done} / ${total}`;
+  }
+
+  // ── Filter ────────────────────────────────────────────────
+  filterSelect.addEventListener('change', () => { filterMode = filterSelect.value; applyFilter(); });
+
+  function applyFilter() {
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      const idx   = parseInt(item.dataset.idx);
+      const entry = results.find(r => r.globalIdx===idx);
+      if (!entry || filterMode==='all') { item.style.display='flex'; return; }
+      item.style.display = (entry.data && entry.data.status===filterMode) ? 'flex' : 'none';
+    });
+  }
+
+  // ── Viewer ────────────────────────────────────────────────
+  function showResult(ri) {
+    currentIdx = ri;
+    const entry = results[ri];
+    if (!entry) return;
+
+    document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+    const sEl = document.querySelector(`.sidebar-item[data-idx="${entry.globalIdx}"]`);
+    if (sEl) { sEl.classList.add('active'); sEl.scrollIntoView({block:'nearest',behavior:'smooth'}); }
+
+    viewerPlaceholder.style.display = 'none';
+    viewerContent.style.display     = 'block';
+    viewerFilename.textContent      = entry.file.name;
+    viewerOriginal.src              = entry.imageDataUrl;
+
+    if (!entry.data || entry.error) {
+      viewerSubtitle.textContent  = `Error: ${entry.error||'Processing failed'}`;
+      viewerDetection.src         = entry.imageDataUrl;
+      classCard.className         = 'result-card';
+      viewerClass.textContent     = 'ERROR';
+      viewerConf.textContent      = '—';
+      viewerDefectType.textContent= '—';
+      allDefects = [];
+      updateNav(); return;
+    }
+
+    const data   = entry.data;
+    const isGood = data.status === 'GOOD';
+    viewerSubtitle.textContent = isGood ? 'No defects found.' : 'Defect detected.';
+
+    // Annotated image
+    if (data.annotated_image) {
+      viewerDetection.src = data.annotated_image.startsWith('data:')
+        ? data.annotated_image : `data:image/jpeg;base64,${data.annotated_image}`;
+    } else {
+      viewerDetection.src = entry.imageDataUrl;
+    }
+
+    // Defects for lightbox
+    allDefects = (data.detections || []).map(d => ({
+      class_name : d.class_name || 'unknown',
+      confidence : d.yolo_conf || d.confidence || 0,
+      bbox       : d.bbox || null,
+    }));
+
+    // Cards
+    classCard.className = `result-card ${isGood?'status-good':'status-bad'}`;
+    viewerClass.textContent = data.status;
+    const conf = parseFloat(data.avg_conf)||0;
+    viewerConf.textContent  = `${conf > 1 ? conf.toFixed(1) : (conf*100).toFixed(1)}%`;
+
+    if (allDefects.length > 0) {
+      const names = [...new Set(allDefects.map(d=>d.class_name))];
+      viewerDefectType.innerHTML = names.map(n=>`<span class="defect-tag">${n}</span>`).join('');
+    } else {
+      viewerDefectType.textContent = 'No Defect';
+    }
+    updateNav();
+  }
+
+  function getVisible() {
+    return filterMode==='all' ? results
+      : results.filter(r => r.data && r.data.status===filterMode);
+  }
+
+  function updateNav() {
+    const vis = getVisible();
+    const pos = vis.findIndex(r => r === results[currentIdx]);
+    navCounter.textContent = vis.length > 0 ? `${pos+1} / ${vis.length}` : '— / —';
+    prevBtn.disabled = pos <= 0;
+    nextBtn.disabled = pos >= vis.length - 1;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    const vis = getVisible();
+    const pos = vis.findIndex(r => r===results[currentIdx]);
+    if (pos > 0) showResult(results.indexOf(vis[pos-1]));
+  });
+  nextBtn.addEventListener('click', () => {
+    const vis = getVisible();
+    const pos = vis.findIndex(r => r===results[currentIdx]);
+    if (pos < vis.length-1) showResult(results.indexOf(vis[pos+1]));
+  });
+
+  document.addEventListener('keydown', e => {
+    if (lightboxOverlay.classList.contains('lb-open')) return;
+    if (resultsView.style.display==='none') return;
+    if (e.key==='ArrowLeft')  prevBtn.click();
+    if (e.key==='ArrowRight') nextBtn.click();
+  });
+
+  // ── Lightbox ──────────────────────────────────────────────
+  detectionCard.addEventListener('click', openLightbox);
+  lightboxClose.addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
+  lightboxOverlay.addEventListener('click', e => { if (e.target===lightboxOverlay) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeLightbox(); });
+  window.addEventListener('resize', () => {
+    if (lightboxOverlay.classList.contains('lb-open')) drawBoxes();
+  });
+
+  function openLightbox() {
+    const src = viewerOriginal.src;
+    if (!src || src===window.location.href) return;
+    lightboxImage.src = src;
+    buildDefectList();
+    lightboxImage.onload = drawBoxes;
+    if (lightboxImage.complete && lightboxImage.naturalWidth>0) drawBoxes();
+    lightboxOverlay.classList.add('lb-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightboxOverlay.classList.remove('lb-open');
+    document.body.style.overflow = '';
+    bboxSvg.innerHTML = '';
+  }
+
+  function buildDefectList() {
+    lbDefectList.innerHTML = '';
+    allDefects.forEach((d, i) => {
+      const colour = getColour(d.class_name);
+      const pct    = Math.round(normConf(d.confidence)*100);
+      const entry  = document.createElement('div');
+      entry.className = 'de-entry';
+      entry.dataset.idx = i;
+      entry.innerHTML = `
+        <span class="de-dot" style="background:${colour}"></span>
+        <div class="de-body">
+          <div class="de-name">${d.class_name.replace(/_/g,' ')}</div>
+          <div class="de-conf">${pct}% confidence</div>
+          <div class="de-bar"><div class="de-bar-fill" style="width:${pct}%;background:${colour}"></div></div>
+        </div>`;
+      entry.addEventListener('mouseenter', () => highlightBox(i, true));
+      entry.addEventListener('mouseleave', () => highlightBox(i, false));
+      lbDefectList.appendChild(entry);
+    });
+    if (!allDefects.length) {
+      lbDefectList.innerHTML = '<p style="color:var(--text-secondary);font-size:0.82rem;text-align:center;padding:12px">No detections</p>';
+    }
+  }
+
+  function drawBoxes() {
+    bboxSvg.innerHTML = '';
+    if (!allDefects.length) return;
+    const img  = lightboxImage;
+    const natW = img.naturalWidth, natH = img.naturalHeight;
+    if (!natW || !natH) return;
+    const wrap   = document.getElementById('lightboxImageWrap');
+    const rect   = wrap.getBoundingClientRect();
+    const scale  = Math.min(rect.width/natW, rect.height/natH);
+    const rW     = natW*scale, rH = natH*scale;
+    const offX   = (rect.width-rW)/2, offY = (rect.height-rH)/2;
+    const scaleX = rW/natW, scaleY = rH/natH;
+
+    bboxSvg.style.left=offX+'px'; bboxSvg.style.top=offY+'px';
+    bboxSvg.style.width=rW+'px';  bboxSvg.style.height=rH+'px';
+    bboxSvg.setAttribute('viewBox',`0 0 ${rW} ${rH}`);
+
+    allDefects.forEach((d, i) => {
+      if (!d.bbox || d.bbox.length < 4) return;
+      const [x1,y1,x2,y2] = d.bbox;
+      const rx=x1*scaleX, ry=y1*scaleY, rw=(x2-x1)*scaleX, rh=(y2-y1)*scaleY;
+      const colour = getColour(d.class_name);
+      const pct    = Math.round(normConf(d.confidence)*100);
+      const label  = `${d.class_name.replace(/_/g,' ')} ${pct}%`;
+      const lW     = label.length*7.5+12, lH=22;
+      const lY     = ry>lH+6 ? ry-lH-4 : ry+rh+4;
+
+      const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.dataset.idx = i;
+
+      const box = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      box.setAttribute('x',rx); box.setAttribute('y',ry);
+      box.setAttribute('width',rw); box.setAttribute('height',rh);
+      box.setAttribute('fill','none'); box.setAttribute('stroke',colour);
+      box.setAttribute('stroke-width','2'); box.setAttribute('rx','4');
+      box.classList.add('bbox-rect');
+
+      const bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      bg.setAttribute('x',rx); bg.setAttribute('y',lY);
+      bg.setAttribute('width',lW); bg.setAttribute('height',lH);
+      bg.setAttribute('fill',colour); bg.setAttribute('rx','4');
+
+      const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x',rx+6); txt.setAttribute('y',lY+15);
+      txt.setAttribute('fill','#fff'); txt.setAttribute('font-size','12');
+      txt.setAttribute('font-family','Poppins,sans-serif');
+      txt.setAttribute('font-weight','700');
+      txt.setAttribute('pointer-events','none');
+      txt.textContent = label;
+
+      g.appendChild(box); g.appendChild(bg); g.appendChild(txt);
+      g.addEventListener('mouseenter', () => highlightBox(i,true));
+      g.addEventListener('mouseleave', () => highlightBox(i,false));
+      bboxSvg.appendChild(g);
+    });
+  }
+
+  function highlightBox(idx, on) {
+    const g    = bboxSvg.querySelector(`g[data-idx="${idx}"]`);
+    const rect = g && g.querySelector('.bbox-rect');
+    const entry= lbDefectList.querySelector(`.de-entry[data-idx="${idx}"]`);
+    if (rect) {
+      const c = getColour(allDefects[idx].class_name);
+      rect.setAttribute('fill', on ? c+'22' : 'none');
+      rect.setAttribute('stroke-width', on ? '2.5' : '2');
+      if (g) g.style.filter = on ? `drop-shadow(0 0 4px ${c}88)` : 'none';
+    }
+    if (entry) entry.classList.toggle('active', on);
+  }
+
+  // ── CSV export ────────────────────────────────────────────
+  csvBtn.addEventListener('click', () => {
+    if (!results.length) return;
+    const rows = [['filename','status','defect_count','avg_confidence','defects',
+      'crazing','inclusion','patches','pitted_surface','rolled-in_scale','scratches']];
+    results.forEach(r => {
+      const d = r.data;
+      if (!d) { rows.push([r.file.name,'ERROR','','','','','','','','','']); return; }
+      const s = d.summary||{};
+      rows.push([r.file.name,d.status,d.defect_count,d.avg_conf,
+        (d.defects||[]).join('; ')||'none',
+        s.crazing||0,s.inclusion||0,s.patches||0,
+        s.pitted_surface||0,s['rolled-in_scale']||0,s.scratches||0]);
+    });
+    const csv  = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv],{type:'text/csv'});
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href=url; a.download='batch_results.csv'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // ── Utility ───────────────────────────────────────────────
+  function readFileAsDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload  = e => resolve(e.target.result);
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    });
+  }
+
+  // Start in upload view
+  showUploadView();
+});
+</script>
+</body>
+</html>

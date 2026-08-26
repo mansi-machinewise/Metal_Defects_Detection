@@ -352,3 +352,65 @@ body {
   .topbar-brand span { display: none; }
   .upload-another-btn { width: 100%; justify-content: center; }
 }
+
+.batch-viewer {
+  padding: 20px 24px;
+}
+
+.batch-viewer .image-panel {
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.batch-viewer .image-frame {
+  aspect-ratio: unset;
+  height: 280px;
+}
+
+.batch-viewer .image-card-header {
+  font-size: 0.78rem;
+  padding: 8px 12px;
+}
+
+.batch-viewer .result-cards {
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.batch-viewer .result-card {
+  padding: 12px;
+}
+
+.batch-viewer .card-icon {
+  width: 36px;
+  height: 36px;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.batch-viewer .card-label {
+  font-size: 0.65rem;
+  margin-bottom: 4px;
+}
+
+.batch-viewer .card-value {
+  font-size: 1rem;
+}
+
+.batch-viewer .dashboard-intro {
+  margin-bottom: 12px !important;
+}
+
+.batch-viewer #viewerFilename {
+  font-size: 0.95rem !important;
+}
+
+.batch-viewer #viewerSubtitle {
+  font-size: 0.78rem !important;
+}
+
+.batch-viewer .viewer-nav {
+  margin-top: 8px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
