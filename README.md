@@ -75,7 +75,7 @@ Input Image
 ### Prerequisites
 
 - Python 3.10+
-- CUDA-capable GPU (recommended — tested on NVIDIA with 8GB+ VRAM)
+- CUDA-capable GPU (recommended — tested on NVIDIA with 4GB+ VRAM)
 
 ### 1. Clone and create virtual environment
 
