@@ -12,8 +12,8 @@ from torchvision import datasets, transforms, models
 from torch.optim.lr_scheduler import CosineAnnealingLR
 
 # ---- Config ---------------------------------------------------------------
-DATA_DIR    = r"D:\Metal_Defects\Metal_Defects_Detection\dataset_crops"
-OUTPUT_DIR  = r"D:\Metal_Defects\Metal_Defects_Detection\outputs\classifier"
+DATA_DIR    = r"D:\Metal_Defects\dataset_crops"
+OUTPUT_DIR  = r"D:\Metal_Defects\outputs\classifier"
 BATCH_SIZE  = 32          # was 4 — too small for stable BatchNorm
 EPOCHS      = 50
 LR_HEAD     = 1e-3        # head learning rate
