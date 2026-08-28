@@ -294,7 +294,7 @@ Same as `/predict/batch` but returns a downloadable CSV file.
 
 ## Test Suite
 
-Run individual tests from the project root with the virtual environment active and the FastAPI server running:
+Run individual tests from the project root with the virtual environment active and the FastAPI server running. Run tests on one terminal and run the terminal on another terminal.
 
 ```bash
 # Full hybrid evaluation on test set
