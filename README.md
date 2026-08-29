@@ -292,6 +292,54 @@ Same as `/predict/batch` but returns a downloadable CSV file.
 
 ---
 
+## Training Data
+
+### YOLO11m — Detection Dataset
+
+| Detail | Value |
+|--------|-------|
+| Total training images | 3,140 |
+| Crazing | 570 |
+| Inclusion | 500 |
+| Patches | 500 |
+| Pitted Surface | 500 |
+| Rolled-in Scale | 570 |
+| Scratches | 500 |
+
+### EfficientNetB2 — Classification Dataset
+
+| Detail | Value |
+|--------|-------|
+| Total cropped images | 9,229 |
+| Source | YOLO-detected crops from training images |
+
+---
+
+## Performance & Latency
+
+| Mode | Latency |
+|------|---------|
+| Single image (end-to-end) | 300 – 500 ms |
+| Batch mode (per image) | 70 – 90 ms |
+
+> Latency measured on an NVIDIA GPU with 4GB+ VRAM. CPU inference will be significantly slower.
+
+---
+
+## Image Capture Guidelines
+
+To ensure accurate and reliable inspection results, images should meet the following conditions before uploading:
+
+| Requirement | Details |
+|-------------|---------|
+| **Brightness** | Image must be sufficiently bright — avoid underexposed or dimly lit shots |
+| **Lighting uniformity** | Use diffused, even lighting across the entire surface — avoid concentrated light sources or hotspots |
+| **Background** | Plain, neutral background with no visual clutter |
+| **Focus** | Image must be sharp and in focus; avoid motion blur |
+| **Framing** | Metal surface should occupy the majority of the frame |
+
+> **Note:** Uneven or insufficient lighting is the most common cause of missed detections or false positives. A lightbox or ring light setup is strongly recommended for consistent results.
+
 ## Test Suite
 
 Run individual tests from the project root with the virtual environment active and the FastAPI server running. Run tests on one terminal and run the terminal on another terminal.
